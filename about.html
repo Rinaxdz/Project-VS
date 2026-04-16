@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — Ninang's Childcare</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sage:        #7A9E7E;
+      --sage-light:  #A8C5A0;
+      --sage-dark:   #4E7254;
+      --sage-pale:   #EAF0E6;
+      --beige:       #D9CBAA;
+      --beige-light: #F0E8D5;
+      --beige-pale:  #FAF5EC;
+      --ivory:       #FFFDF6;
+      --brown:       #7C5C3E;
+      --brown-light: #A07850;
+      --brown-dark:  #4A3728;
+      --cream:       #F5ECD7;
+      --text-dark:   #2E2419;
+      --text-mid:    #5C4A36;
+      --text-muted:  #8C7A66;
+      --radius-sm:   8px;
+      --radius-md:   14px;
+      --radius-lg:   20px;
+      --radius-xl:   28px;
+      --radius-pill: 50px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--ivory);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ========== NAV ========== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      height: 68px;
+      background: rgba(255,253,246,0.93);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--beige);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      transition: box-shadow 0.3s;
+    }
+
+    nav.scrolled { box-shadow: 0 4px 24px rgba(74,55,40,0.08); }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--brown-dark);
+      font-style: italic;
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--sage-dark); font-style: normal; }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-mid);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--sage-dark); }
+
+    .nav-cta {
+      background: var(--sage-dark) !important;
+      color: var(--ivory) !important;
+      padding: 0.48rem 1.2rem;
+      border-radius: var(--radius-pill);
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--brown) !important; }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--brown-dark);
+      border-radius: 2px;
+    }
+
+    .nav-drawer {
+      position: fixed;
+      top: 0; right: 0;
+      width: 280px; height: 100%;
+      background: var(--ivory);
+      z-index: 300;
+      padding: 2rem 1.5rem;
+      transform: translateX(100%);
+      transition: transform 0.35s ease;
+      box-shadow: -8px 0 40px rgba(74,55,40,0.12);
+    }
+
+    .nav-drawer.open { transform: translateX(0); }
+
+    .nav-drawer ul {
+      list-style: none;
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .drawer-link {
+      display: block;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-mid);
+      text-decoration: none;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .drawer-link:hover { background: var(--sage-pale); color: var(--sage-dark); }
+
+    .drawer-cta {
+      background: var(--sage-dark);
+      color: var(--ivory) !important;
+      text-align: center;
+      margin-top: 1rem;
+      border-radius: var(--radius-pill);
+    }
+
+    .drawer-close {
+      position: absolute; top: 1.2rem; right: 1.2rem;
+      background: none; border: none;
+      font-size: 1.6rem; color: var(--text-muted); cursor: pointer;
+    }
+
+    .nav-overlay {
+      position: fixed; inset: 0;
+      background: rgba(46,36,25,0.4);
+      z-index: 250; opacity: 0; pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+
+    .nav-overlay.show { opacity: 1; pointer-events: all; }
+
+    /* ========== PAGE HERO ========== */
+    .page-hero {
+      min-height: 52vh;
+      background: var(--brown-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: -120px; left: -100px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: rgba(122,158,126,0.1);
+      pointer-events: none;
+    }
+
+    .page-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; right: -80px;
+      width: 380px; height: 380px;
+      border-radius: 50%;
+      background: rgba(160,120,80,0.09);
+      pointer-events: none;
+    }
+
+    .page-hero > * { position: relative; z-index: 2; }
+
+    .hero-flag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: rgba(255,253,246,0.07);
+      border: 1px solid rgba(255,253,246,0.14);
+      border-radius: var(--radius-pill);
+      padding: 0.4rem 1rem;
+      font-size: 0.78rem;
+      color: rgba(255,253,246,0.7);
+      font-style: italic;
+      margin-bottom: 1.4rem;
+    }
+
+    .page-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sage-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      margin-bottom: 1rem;
+    }
+
+    .page-eyebrow::before {
+      content: '';
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--sage-light);
+      border-radius: 2px;
+    }
+
+    .page-eyebrow::after {
+      content: '';
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--sage-light);
+      border-radius: 2px;
+    }
+
+    .page-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      color: var(--ivory);
+      line-height: 1.18;
+      margin-bottom: 1.1rem;
+    }
+
+    .page-hero h1 em { color: var(--sage-light); font-style: italic; }
+
+    .page-hero p {
+      font-size: 1rem;
+      color: rgba(255,253,246,0.62);
+      line-height: 1.78;
+      max-width: 560px;
+    }
+
+    /* Tab nav under hero */
+    .page-tabs {
+      background: var(--ivory);
+      border-bottom: 1px solid var(--beige);
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      position: sticky;
+      top: 68px;
+      z-index: 100;
+    }
+
+    .page-tab {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 1rem 2rem;
+      border-bottom: 3px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .page-tab:hover { color: var(--sage-dark); }
+    .page-tab.active { color: var(--sage-dark); border-bottom-color: var(--sage-dark); }
+
+    /* ========== SHARED LAYOUT ========== */
+    .container { max-width: 1060px; margin: 0 auto; }
+    section { padding: 5.5rem 2rem; }
+
+    .section-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sage-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .section-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--sage);
+      border-radius: 2px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      color: var(--brown-dark);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .section-title em { color: var(--sage-dark); font-style: italic; }
+
+    /* ========== OUR STORY ========== */
+    .story-section { background: var(--ivory); }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+      margin-top: 1rem;
+    }
+
+    .story-body {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.85;
+    }
+
+    .story-body p + p { margin-top: 1rem; }
+
+    .story-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.08rem;
+      font-style: italic;
+      color: var(--text-mid);
+      line-height: 1.75;
+      border-left: 3px solid var(--sage);
+      padding-left: 1.3rem;
+      margin: 1.8rem 0;
+    }
+
+    /* Word cards */
+    .word-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .word-card {
+      background: var(--beige-pale);
+      border: 1px solid var(--beige);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem 1.6rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .word-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 32px rgba(74,55,40,0.08);
+    }
+
+    .word-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--sage);
+      border-radius: 4px 0 0 4px;
+    }
+
+    .word-card-filipino {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--sage-dark);
+      margin-bottom: 0.1rem;
+    }
+
+    .word-card-type {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .word-card-desc {
+      font-size: 0.86rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+
+    /* ========== MISSION & VALUES ========== */
+    .mission-section {
+      background: var(--sage-pale);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mission-section::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 380px; height: 380px;
+      border-radius: 50%;
+      background: rgba(122,158,126,0.15);
+      pointer-events: none;
+    }
+
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .mission-box {
+      background: var(--ivory);
+      border: 1px solid var(--beige);
+      border-radius: var(--radius-xl);
+      padding: 2.4rem;
+      box-shadow: 0 4px 24px rgba(74,55,40,0.06);
+      height: 100%;
+    }
+
+    .mission-box h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--brown-dark);
+      margin-bottom: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .mission-box h3 span { font-size: 1.4rem; }
+
+    .mission-box p {
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    /* Values list */
+    .values-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .value-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      padding: 0.85rem 1rem;
+      background: var(--sage-pale);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--sage-light);
+      transition: transform 0.2s;
+    }
+
+    .value-item:hover { transform: translateX(4px); }
+
+    .value-icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .value-item h4 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--brown-dark);
+      margin-bottom: 0.15rem;
+    }
+
+    .value-item p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ========== FAQ ========== */
+    .faq-section { background: var(--ivory); }
+
+    .faq-intro {
+      max-width: 560px;
+      margin-bottom: 3rem;
+    }
+
+    .faq-intro p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-top: 0.5rem;
+    }
+
+    /* Category filter tabs */
+    .faq-cats {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .faq-cat-btn {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: var(--beige-pale);
+      border: 1.5px solid var(--beige);
+      color: var(--text-muted);
+      padding: 0.45rem 1rem;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .faq-cat-btn:hover { background: var(--sage-pale); border-color: var(--sage-light); color: var(--sage-dark); }
+    .faq-cat-btn.active { background: var(--sage-dark); border-color: var(--sage-dark); color: var(--ivory); }
+
+    /* FAQ accordion */
+    .faq-group {
+      margin-bottom: 2.5rem;
+    }
+
+    .faq-group-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--beige);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .faq-item {
+      background: var(--beige-pale);
+      border: 1.5px solid var(--beige);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .faq-item.open {
+      border-color: var(--sage-light);
+    }
+
+    .faq-question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      background: none;
+      border: none;
+      padding: 1.2rem 1.5rem;
+      cursor: pointer;
+      text-align: left;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--brown-dark);
+      transition: background 0.2s;
+    }
+
+    .faq-question:hover { background: rgba(122,158,126,0.06); }
+
+    .faq-item.open .faq-question { background: var(--sage-pale); }
+
+    .faq-chevron {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      background: var(--beige-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s, background 0.2s;
+    }
+
+    .faq-item.open .faq-chevron {
+      transform: rotate(180deg);
+      background: var(--sage-pale);
+    }
+
+    .faq-chevron svg {
+      width: 12px; height: 12px;
+      stroke: var(--text-muted);
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .faq-item.open .faq-chevron svg { stroke: var(--sage-dark); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.38s ease, padding 0.2s;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+    }
+
+    .faq-answer-inner {
+      padding: 0 1.5rem 1.3rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    /* Category hidden state */
+    .faq-group[data-cat].hidden { display: none; }
+
+    /* ========== STILL HAVE QUESTIONS ========== */
+    .contact-strip {
+      background: var(--cream);
+      border-top: 1px solid var(--beige);
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .contact-strip h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--brown-dark);
+      margin-bottom: 0.7rem;
+    }
+
+    .contact-strip h3 em { color: var(--sage-dark); font-style: italic; }
+
+    .contact-strip p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 480px;
+      margin: 0 auto 2rem;
+    }
+
+    .contact-strip-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--sage-dark);
+      color: var(--ivory);
+      padding: 0.9rem 2rem;
+      border-radius: var(--radius-pill);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.22s, transform 0.15s;
+    }
+
+    .btn-primary:hover { background: var(--brown); transform: translateY(-2px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--brown-dark);
+      padding: 0.9rem 2rem;
+      border-radius: var(--radius-pill);
+      border: 2px solid var(--beige);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.22s, border-color 0.22s, transform 0.15s;
+    }
+
+    .btn-outline:hover { border-color: var(--sage); background: var(--sage-pale); transform: translateY(-2px); }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: var(--brown-dark);
+      border-top: 1px solid rgba(255,253,246,0.08);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--ivory); font-style: italic; margin-bottom: 0.4rem; }
+    .footer-tagline { font-size: 0.8rem; color: rgba(255,253,246,0.4); margin-bottom: 1.3rem; }
+
+    .footer-links {
+      display: flex;
+      gap: 1.8rem;
+      justify-content: center;
+      list-style: none;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a { font-size: 0.8rem; color: rgba(255,253,246,0.45); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--sage-light); }
+    .footer-copy { font-size: 0.74rem; color: rgba(255,253,246,0.22); }
+
+    /* ========== ANIMATE ========== */
+    [data-animate] {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.52s ease, transform 0.52s ease;
+    }
+
+    [data-animate].is-visible { opacity: 1; transform: translateY(0); }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 860px) {
+      .story-grid   { grid-template-columns: 1fr; gap: 3rem; }
+      .mission-grid { grid-template-columns: 1fr; }
+      .nav-links    { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 4rem 1.25rem; }
+      .page-hero { padding: 7rem 1.25rem 4rem; }
+      .page-tabs { overflow-x: auto; justify-content: flex-start; }
+      .faq-cats  { gap: 0.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">Ninang's <span>Childcare</span></a>
+    <button class="nav-hamburger" id="hamburgerBtn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html#offer">Services</a></li>
+      <li><a href="about.html" class="active">About Us</a></li>
+      <li><a href="packages.html">Packages</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="booking.html" class="nav-cta">Book Now</a></li>
+    </ul>
+  </nav>
+
+  <div class="nav-drawer" id="navDrawer">
+    <button class="drawer-close" id="drawerClose">&times;</button>
+    <ul>
+      <li><a href="index.html#offer"  class="drawer-link">Services</a></li>
+      <li><a href="about.html"        class="drawer-link">About Us</a></li>
+      <li><a href="packages.html"     class="drawer-link">Packages</a></li>
+      <li><a href="pricing.html"      class="drawer-link">Pricing</a></li>
+      <li><a href="reviews.html"      class="drawer-link">Reviews</a></li>
+      <li><a href="booking.html"      class="drawer-link drawer-cta">Book Now</a></li>
+    </ul>
+  </div>
+  <div class="nav-overlay" id="navOverlay"></div>
+
+
+  <!-- ========== PAGE HERO ========== -->
+  <header class="page-hero">
+    <div class="hero-flag">🇵🇭 A Filipino tradition of love, brought to Canada</div>
+    <div class="page-eyebrow">About Us</div>
+    <h1>The <em>ninang</em> behind<br>the name</h1>
+    <p>
+      Ninang's was created with one simple goal: to care for children the way family would —
+      with warmth, patience, and the unshakeable love of a godmother.
+    </p>
+  </header>
+
+
+  <!-- Sticky tab navigation -->
+  <div class="page-tabs" id="pageTabs">
+    <a href="#story"   class="page-tab active" data-tab="story">Our Story</a>
+    <a href="#mission" class="page-tab"         data-tab="mission">Mission &amp; Values</a>
+    <a href="#faq"     class="page-tab"         data-tab="faq">FAQs</a>
+  </div>
+
+
+  <!-- ========== OUR STORY ========== -->
+  <section class="story-section" id="story">
+    <div class="container">
+      <div class="section-eyebrow">Our Story</div>
+      <h2 class="section-title">Where the<br><em>ninang</em> tradition began</h2>
+
+      <div class="story-grid">
+
+        <div data-animate>
+          <div class="story-body">
+            <p>
+              Ninang's Childcare was created with one simple goal: to care for children the way family would. The word <em>ninang</em> means godmother in Filipino — someone loving, trusted, and always there when needed. That same spirit guides everything we do.
+            </p>
+
+            <blockquote class="story-quote">
+              "In the Philippines, a ninang is more than a godmother — she is a second mother, a trusted guardian, a family pillar. She shows up. She loves without condition. She cares like it's her own."
+            </blockquote>
+
+            <p>
+              Ninang's Childcare was founded by a Filipino woman who migrated to Canada and carried that tradition with her. In Filipino culture, godparents don't just show up for baptisms — they are woven into the fabric of raising a child. They are called on at celebrations, at milestones, at the moments that matter most.
+            </p>
+            <p>
+              That's exactly what we bring to your events. Not just childcare — but the warmth, the attentiveness, and the love of a ninang. We believe raising children takes a village, and we're honoured to be part of yours.
+            </p>
+          </div>
+        </div>
+
+        <div class="word-cards" data-animate>
+
+          <div class="word-card">
+            <div class="word-card-filipino">Ninang</div>
+            <div class="word-card-type">Filipino · noun</div>
+            <div class="word-card-desc">Godmother. A trusted woman who helps raise a child alongside their parents — present at every milestone, every celebration, every moment that counts.</div>
+          </div>
+
+          <div class="word-card">
+            <div class="word-card-filipino">Malasakit</div>
+            <div class="word-card-type">Filipino · noun</div>
+            <div class="word-card-desc">Genuine concern and compassion for others. The feeling of truly caring — not out of obligation, but from the heart. This is the foundation of everything we do.</div>
+          </div>
+
+          <div class="word-card">
+            <div class="word-card-filipino">Bayanihan</div>
+            <div class="word-card-type">Filipino · noun</div>
+            <div class="word-card-desc">Community spirit — the act of coming together to help one another. We believe raising children takes a village, and we're honoured to be part of yours.</div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== MISSION & VALUES ========== -->
+  <section class="mission-section" id="mission">
+    <div class="container">
+      <div class="section-eyebrow">Mission &amp; Values</div>
+      <h2 class="section-title">What we stand <em>for</em></h2>
+
+      <div class="mission-grid" style="margin-top:2.5rem;">
+
+        <!-- Mission -->
+        <div class="mission-box" data-animate>
+          <h3><span>🌿</span> Our Mission</h3>
+          <p>
+            To provide safe, nurturing, and dependable childcare — wherever families need us. We show up with the warmth of a godmother and the professionalism of a trained team, so parents can be fully present in every precious moment.
+          </p>
+        </div>
+
+        <!-- Values -->
+        <div data-animate>
+          <h3 style="font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--brown-dark); margin-bottom:1.2rem; display:flex; align-items:center; gap:0.6rem;">
+            <span>💛</span> Our Values
+          </h3>
+          <div class="values-list">
+            <div class="value-item">
+              <span class="value-icon">🤝</span>
+              <div>
+                <h4>Kindness and Patience</h4>
+                <p>Every child is met with gentleness, warmth, and understanding — no matter their age or energy level.</p>
+              </div>
+            </div>
+            <div class="value-item">
+              <span class="value-icon">🛡️</span>
+              <div>
+                <h4>Safety at Every Level</h4>
+                <p>Background checks, CPR training, and child safety protocols are non-negotiable standards for our entire team.</p>
+              </div>
+            </div>
+            <div class="value-item">
+              <span class="value-icon">🌸</span>
+              <div>
+                <h4>Respect for Children and Families</h4>
+                <p>We honour the trust families place in us and treat every child as if they were our own.</p>
+              </div>
+            </div>
+            <div class="value-item">
+              <span class="value-icon">✨</span>
+              <div>
+                <h4>Warm, Joyful Experiences</h4>
+                <p>We create environments where children feel happy, engaged, and truly cared for — making memories alongside the celebrations.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== FAQ ========== -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+
+      <div class="faq-intro">
+        <div class="section-eyebrow">FAQs</div>
+        <h2 class="section-title">Frequently Asked<br><em>Questions</em></h2>
+        <p>Everything you need to know before booking. Don't see your question here? Reach out — we're always happy to chat.</p>
+      </div>
+
+      <!-- Category filter -->
+      <div class="faq-cats">
+        <button class="faq-cat-btn active" data-cat="all">All Questions</button>
+        <button class="faq-cat-btn" data-cat="general">General</button>
+        <button class="faq-cat-btn" data-cat="safety">Safety</button>
+        <button class="faq-cat-btn" data-cat="events">Events</button>
+        <button class="faq-cat-btn" data-cat="payments">Payments</button>
+      </div>
+
+      <!-- GENERAL -->
+      <div class="faq-group" data-cat="general">
+        <div class="faq-group-title">🌿 General</div>
+        <div class="faq-list">
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              What ages do you care for?
+              <span class="faq-chevron">
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                We provide care for children of various ages — from toddlers to tweens. When you book, please let us know your child's age so we can prepare age-appropriate activities and ensure the right caregiver is matched to your little one.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              How many caregivers will be present?
+              <span class="faq-chevron">
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Caregiver numbers are based on the number of children attending and the type of event. We always ensure a safe child-to-caregiver ratio so every child receives proper attention. We'll confirm the exact team size during your consultation call.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SAFETY -->
+      <div class="faq-group" data-cat="safety">
+        <div class="faq-group-title">🛡️ Safety</div>
+        <div class="faq-list">
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              Are your caregivers insured?
+              <span class="faq-chevron">
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Yes — Ninang's is fully insured for childcare services. Your peace of mind matters deeply to us, and we take every step to ensure our team and your children are protected.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              Are caregivers background-checked?
+              <span class="faq-chevron">
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Absolutely. All caregivers are carefully selected and must pass a thorough background check before working any event with us. We also ensure all team members are CPR-certified and trained in child safety protocols.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- EVENTS -->
+      <div class="faq-group" data-cat="events">
+        <div class="faq-group-title">🎉 Events</div>
+        <div class="faq-list">
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              Do you bring your own supplies?
+              <span class="faq-chevron">
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Yes! We come fully prepared. Our team brings toys, activity materials, play mats, and other essentials suited to your event's age group. You don't need to lift a finger — we handle the setup and the fun.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              How early do your caregivers arrive?
+              <span class="faq-chevron">
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Our caregivers always arrive early to set up before the event begins. The exact arrival time is confirmed with you ahead of the event — typically 30–45 minutes before childcare is scheduled to start.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              What areas do you serve?
+              <span class="faq-chevron">
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                We proudly serve families across the Greater Toronto Area (GTA), including Toronto, Mississauga, Brampton, Vaughan, Markham, Scarborough, Etobicoke, Pickering, and surrounding communities. Travel fees apply for events beyond 20 km — see our <a href="pricing.html" style="color:var(--sage-dark); font-weight:700;">Pricing page</a> for details.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PAYMENTS -->
+      <div class="faq-group" data-cat="payments">
+        <div class="faq-group-title">💳 Payments</div>
+        <div class="faq-list">
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              Is a deposit required to secure my booking?
+              <span class="faq-chevron">
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Yes — a non-refundable deposit is required to secure your booking date. The deposit amount and remaining balance details are discussed during your consultation call. This ensures your event date is reserved exclusively for you.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              How is the final price determined?
+              <span class="faq-chevron">
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Final pricing is always confirmed during your free consultation call. It depends on factors like the number of children, event duration, number of caregivers needed, any add-ons, and travel distance. We always walk you through the full quote transparently — no hidden charges, ever.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========== STILL HAVE QUESTIONS ========== -->
+  <div class="contact-strip">
+    <h3>Still have a <em>question?</em></h3>
+    <p>We're always happy to chat. Book a free consultation call or send us a message — we'll get back to you quickly.</p>
+    <div class="contact-strip-btns">
+      <a href="booking.html" class="btn-primary">Book a Consultation Call</a>
+      <a href="mailto:hello@ninangschildcare.com" class="btn-outline">Send Us a Message</a>
+    </div>
+  </div>
+
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <div class="footer-logo">Ninang's Childcare</div>
+    <p class="footer-tagline">Caring like family — wherever you go.</p>
+    <ul class="footer-links">
+      <li><a href="index.html#offer">Services</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="packages.html">Packages</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="booking.html">Book Now</a></li>
+      <li><a href="mailto:hello@ninangschildcare.com">Contact</a></li>
+    </ul>
+    <p class="footer-copy">© 2025 Ninang's Childcare. All rights reserved.</p>
+  </footer>
+
+
+  <script>
+    /* ---- Navbar scroll ---- */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    /* ---- Mobile drawer ---- */
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navDrawer    = document.getElementById('navDrawer');
+    const drawerClose  = document.getElementById('drawerClose');
+    const navOverlay   = document.getElementById('navOverlay');
+
+    const openDrawer  = () => { navDrawer.classList.add('open'); navOverlay.classList.add('show'); document.body.style.overflow = 'hidden'; };
+    const closeDrawer = () => { navDrawer.classList.remove('open'); navOverlay.classList.remove('show'); document.body.style.overflow = ''; };
+
+    hamburgerBtn.addEventListener('click', openDrawer);
+    drawerClose.addEventListener('click', closeDrawer);
+    navOverlay.addEventListener('click', closeDrawer);
+    document.querySelectorAll('.drawer-link').forEach(l => l.addEventListener('click', closeDrawer));
+
+    /* ---- Sticky tab highlighting on scroll ---- */
+    const tabLinks  = document.querySelectorAll('.page-tab');
+    const sections  = ['story', 'mission', 'faq'].map(id => document.getElementById(id));
+    const navH      = 68 + 48; // navbar + tabs height
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(sec => {
+        if (window.scrollY >= sec.offsetTop - navH - 20) current = sec.id;
+      });
+      tabLinks.forEach(link => {
+        link.classList.toggle('active', link.dataset.tab === current);
+      });
+    }, { passive: true });
+
+    /* ---- Tab click smooth scroll ---- */
+    tabLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.getElementById(this.dataset.tab);
+        if (!target) return;
+        window.scrollTo({ top: target.offsetTop - navH, behavior: 'smooth' });
+      });
+    });
+
+    /* ---- FAQ accordion ---- */
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const item     = this.closest('.faq-item');
+        const isOpen   = item.classList.contains('open');
+
+        // Close all open items
+        document.querySelectorAll('.faq-item.open').forEach(el => {
+          el.classList.remove('open');
+          el.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+
+        // Open clicked if it was closed
+        if (!isOpen) {
+          item.classList.add('open');
+          this.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    /* ---- FAQ category filter ---- */
+    document.querySelectorAll('.faq-cat-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        // Toggle active button
+        document.querySelectorAll('.faq-cat-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+
+        const selected = this.dataset.cat;
+
+        document.querySelectorAll('.faq-group[data-cat]').forEach(group => {
+          if (selected === 'all' || group.dataset.cat === selected) {
+            group.classList.remove('hidden');
+          } else {
+            group.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    /* ---- Scroll animations ---- */
+    const animEls = document.querySelectorAll('[data-animate]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const siblings = [...entry.target.parentElement.querySelectorAll('[data-animate]')];
+          entry.target.style.transitionDelay = (siblings.indexOf(entry.target) * 90) + 'ms';
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    animEls.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

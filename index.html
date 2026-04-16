@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ninang's Childcare — On-the-Go Care for Events</title>
+  <link rel="stylesheet" href="style.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav id="navbar">
+    <div class="nav-logo">Ninang's <span>Childcare</span></div>
+
+    <button class="nav-hamburger" id="hamburgerBtn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#offer">Services</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="packages.html">Packages</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="booking.html" class="nav-cta">Book Now</a></li>
+    </ul>
+  </nav>
+
+  <!-- Mobile drawer -->
+  <div class="nav-drawer" id="navDrawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <ul>
+      <li><a href="#offer"        class="drawer-link">Services</a></li>
+      <li><a href="about.html"    class="drawer-link">About Us</a></li>
+      <li><a href="packages.html" class="drawer-link">Packages</a></li>
+      <li><a href="pricing.html"  class="drawer-link">Pricing</a></li>
+      <li><a href="reviews.html"  class="drawer-link">Reviews</a></li>
+      <li><a href="booking.html"  class="drawer-link drawer-cta">Book Now</a></li>
+    </ul>
+  </div>
+  <div class="nav-overlay" id="navOverlay"></div>
+
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+
+    <div class="hero-left">
+      <div class="hero-badge">Trusted Event Childcare</div>
+
+      <h1>
+        On-the-Go Childcare<br>
+        for <em>Events &amp;</em><br>
+        <em>Special Occasions</em>
+      </h1>
+
+      <p class="hero-sub">Caring like family — wherever you go.</p>
+
+      <p class="hero-tagline">
+        We bring professional, warm, and reliable childcare directly to your events —
+        so parents can be fully present in every precious moment.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="packages.html" class="btn-primary">View Packages</a>
+        <a href="booking.html"  class="btn-outline">Book Childcare</a>
+      </div>
+
+      <div class="hero-trust">
+        <div class="hero-trust-stars">★★★★★</div>
+        <p>
+          <strong>Loved by 200+ families</strong><br>
+          across weddings, birthdays &amp; corporate events
+        </p>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-illustration">
+        <div class="hero-card-stack">
+          <div class="hero-card hero-card-back1"></div>
+          <div class="hero-card hero-card-back2"></div>
+          <div class="hero-card hero-card-main">
+            <div class="card-icon">🎪</div>
+            <div class="card-label">Event Childcare</div>
+            <div class="card-title">Wedding Reception</div>
+            <div class="card-meta">
+              <span class="card-dot"></span>
+              <span>2 caregivers · Ages 1–10 · 6 hrs</span>
+            </div>
+          </div>
+        </div>
+        <div class="floating-badge floating-badge-1">✓ Fully Vetted</div>
+        <div class="floating-badge floating-badge-2">🌿 Family First</div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ========== WHAT WE OFFER ========== -->
+  <section class="offer-section" id="offer">
+    <div class="container">
+      <div class="section-eyebrow">What We Offer</div>
+      <h2 class="section-title">Childcare tailored<br>to <em>your special day</em></h2>
+      <p class="section-lead">
+        From intimate family gatherings to grand celebrations, we provide attentive,
+        loving care so the little ones are happy — and the adults can relax.
+      </p>
+
+      <div class="offer-grid">
+        <div class="offer-card" data-animate>
+          <div class="offer-icon">💍</div>
+          <h3>Wedding &amp; Reception Care</h3>
+          <p>Dedicated caregivers keep children engaged and safe throughout your ceremony and reception, from flower girls to ring bearers and all the tiny guests in between.</p>
+        </div>
+        <div class="offer-card" data-animate>
+          <div class="offer-icon">🎂</div>
+          <h3>Birthday &amp; Party Events</h3>
+          <p>We bring age-appropriate activities and gentle supervision so children have a magical time while parents mingle and celebrate freely.</p>
+        </div>
+        <div class="offer-card" data-animate>
+          <div class="offer-icon">🏢</div>
+          <h3>Corporate &amp; Work Events</h3>
+          <p>Family-friendly corporate functions made easier — professional childcare on-site so your team can focus, network, and enjoy the event.</p>
+        </div>
+        <div class="offer-card" data-animate>
+          <div class="offer-icon">🎉</div>
+          <h3>Debuts &amp; Milestone Parties</h3>
+          <p>Quinceañeras, christenings, graduations — we handle the little ones with warmth and patience so your milestone moments are stress-free.</p>
+        </div>
+        <div class="offer-card" data-animate>
+          <div class="offer-icon">🌿</div>
+          <h3>On-Site Setup &amp; Activities</h3>
+          <p>We bring toys, arts &amp; crafts, storytime, and age-appropriate games — creating a mini wonderland for children right at your venue.</p>
+        </div>
+        <div class="offer-card" data-animate>
+          <div class="offer-icon">🛡️</div>
+          <h3>Safety &amp; Peace of Mind</h3>
+          <p>All our caregivers are background-checked, CPR-trained, and experienced. Parents receive regular updates throughout the event.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== WHY CHOOSE US ========== -->
+  <section class="why-section" id="why">
+    <div class="container">
+      <div class="why-inner">
+
+        <div class="why-text">
+          <div class="section-eyebrow">Why Families Choose Ninang's</div>
+          <h2 class="section-title">We care like<br><em>family, not strangers</em></h2>
+          <p class="section-lead">
+            Our name says it all — "Ninang" means godmother. Every child in our care
+            receives warmth, attention, and love.
+          </p>
+
+          <div class="why-list">
+            <div class="why-item" data-animate>
+              <div class="why-num">1</div>
+              <div>
+                <h4>Vetted &amp; Trained Caregivers</h4>
+                <p>All staff undergo thorough background checks, CPR certification, and child safety training before their first event.</p>
+              </div>
+            </div>
+            <div class="why-item" data-animate>
+              <div class="why-num">2</div>
+              <div>
+                <h4>Flexible &amp; Mobile Service</h4>
+                <p>We come to you — any venue, any occasion. No drop-offs needed; we set up wherever you are.</p>
+              </div>
+            </div>
+            <div class="why-item" data-animate>
+              <div class="why-num">3</div>
+              <div>
+                <h4>Age-Appropriate Activities</h4>
+                <p>From toddlers to tweens, we tailor activities and care to each child's needs and energy levels.</p>
+              </div>
+            </div>
+            <div class="why-item" data-animate>
+              <div class="why-num">4</div>
+              <div>
+                <h4>Constant Parent Communication</h4>
+                <p>We check in regularly and are always reachable — so you can relax knowing your little ones are in good hands.</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 2rem;">
+            <a href="about.html" style="
+              display: inline-flex;
+              align-items: center;
+              gap: 0.5rem;
+              font-family: 'Nunito', sans-serif;
+              font-size: 0.88rem;
+              font-weight: 700;
+              color: var(--sage-dark);
+              text-decoration: none;
+              letter-spacing: 0.03em;
+            ">
+              Our full story &amp; values
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="why-visual">
+          <div class="why-stat-card">
+            <div class="stat-num" data-count="200">0</div>
+            <div class="stat-label">Families served across Metro Manila</div>
+          </div>
+          <div class="why-stat-row">
+            <div class="why-stat-small">
+              <div class="stat-num">5★</div>
+              <div class="stat-label">Average rating from event hosts</div>
+            </div>
+            <div class="why-stat-small">
+              <div class="stat-num">3 yrs</div>
+              <div class="stat-label">Experience in event childcare</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== TESTIMONIALS ========== -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="container">
+      <div class="section-eyebrow">Families Love Us</div>
+      <h2 class="section-title">What parents are <em>saying</em></h2>
+
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card" data-animate>
+          <div class="quote-mark">"</div>
+          <div class="stars">★★★★★</div>
+          <p>Ninang's team was an absolute blessing at our wedding. The kids were so happy and entertained — we didn't worry once. Our little nephew even cried when they had to leave!</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">AC</div>
+            <div>
+              <div class="author-name">Ana &amp; Carlo</div>
+              <div class="author-role">Wedding Reception, Tagaytay</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card" data-animate>
+          <div class="quote-mark">"</div>
+          <div class="stars">★★★★★</div>
+          <p>Booked them for my daughter's debut and they handled all the younger siblings perfectly. They set up a whole little play area — parents were so impressed. Will book again!</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">MR</div>
+            <div>
+              <div class="author-name">Marites R.</div>
+              <div class="author-role">Debut Party, Quezon City</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card" data-animate>
+          <div class="quote-mark">"</div>
+          <div class="stars">★★★★★</div>
+          <p>Our company family day needed reliable child supervision and Ninang's delivered. Professional, warm, and the children loved them. Highly recommended for corporate events!</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">JS</div>
+            <div>
+              <div class="author-name">Jerome S.</div>
+              <div class="author-role">Corporate Family Day, BGC</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- See all reviews link -->
+      <div style="text-align:center; margin-top:2.5rem;">
+        <a href="reviews.html" style="
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-family: 'Nunito', sans-serif;
+          font-size: 0.9rem;
+          font-weight: 700;
+          color: var(--sage-dark);
+          text-decoration: none;
+          border: 2px solid var(--sage-light);
+          padding: 0.7rem 1.6rem;
+          border-radius: 50px;
+          transition: background 0.2s, border-color 0.2s;
+        "
+        onmouseover="this.style.background='#EAF0E6'; this.style.borderColor='#7A9E7E';"
+        onmouseout="this.style.background='transparent'; this.style.borderColor='#A8C5A0';">
+          See All Reviews
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== PACKAGES OVERVIEW ========== -->
+  <section class="offer-section" id="packages" style="background: var(--cream);">
+    <div class="container">
+      <div class="section-eyebrow">Our Packages</div>
+      <h2 class="section-title">Three packages,<br>one <em>caring heart</em></h2>
+      <p class="section-lead">
+        Each package is named after a Filipino word that reflects the spirit behind it.
+        Choose the one that fits your event — or let us build a custom plan for you.
+      </p>
+
+      <div class="offer-grid" style="margin-top:3rem;">
+
+        <div class="offer-card" data-animate style="text-align:center;">
+          <div class="offer-icon" style="margin:0 auto 1rem;">🏡</div>
+          <h3>Tahanan Package</h3>
+          <p style="font-size:0.8rem; color:var(--text-muted); font-style:italic; margin-bottom:0.4rem;">"Home" — safe, comforting, familiar</p>
+          <p style="margin-bottom:0.6rem;">Small events · Up to 8 children · Up to 3 hrs · 2 caregivers</p>
+          <p style="font-family:'Playfair Display',serif; font-style:italic; color:var(--sage-dark); font-size:1.1rem; margin-bottom:1rem;">Starting at $350 CAD</p>
+          <a href="packages.html" style="
+            display:inline-block; font-size:0.82rem; font-weight:700;
+            color:var(--sage-dark); text-decoration:none;
+            border:1.5px solid var(--sage-light); padding:0.45rem 1rem;
+            border-radius:50px; transition:background 0.2s;
+          "
+          onmouseover="this.style.background='#EAF0E6';"
+          onmouseout="this.style.background='transparent';">View Details →</a>
+        </div>
+
+        <div class="offer-card" data-animate style="text-align:center; background:var(--brown-dark); border-color:var(--brown);">
+          <div class="offer-icon" style="margin:0 auto 1rem; background:rgba(168,197,160,0.15);">🌿</div>
+          <h3 style="color:var(--ivory);">Alaga Package</h3>
+          <p style="font-size:0.8rem; color:rgba(255,253,246,0.5); font-style:italic; margin-bottom:0.4rem;">"To care for &amp; nurture" — thoughtful, attentive</p>
+          <p style="color:rgba(255,253,246,0.65); margin-bottom:0.6rem;">Medium events · 10–15 children · 3–4 hrs · 2–3 caregivers</p>
+          <p style="font-family:'Playfair Display',serif; font-style:italic; color:var(--sage-light); font-size:1.1rem; margin-bottom:1rem;">Starting at $600 CAD</p>
+          <a href="packages.html" style="
+            display:inline-block; font-size:0.82rem; font-weight:700;
+            color:var(--ivory); text-decoration:none;
+            border:1.5px solid rgba(255,253,246,0.3); padding:0.45rem 1rem;
+            border-radius:50px; transition:background 0.2s;
+          "
+          onmouseover="this.style.background='rgba(255,253,246,0.1)';"
+          onmouseout="this.style.background='transparent';">View Details →</a>
+        </div>
+
+        <div class="offer-card" data-animate style="text-align:center;">
+          <div class="offer-icon" style="margin:0 auto 1rem;">👨‍👩‍👧‍👦</div>
+          <h3>Pamilya Package</h3>
+          <p style="font-size:0.8rem; color:var(--text-muted); font-style:italic; margin-bottom:0.4rem;">"Family" — full-service for life's biggest moments</p>
+          <p style="margin-bottom:0.6rem;">Large events · 20–30 children · 4–5 hrs · Full team</p>
+          <p style="font-family:'Playfair Display',serif; font-style:italic; color:var(--sage-dark); font-size:1.1rem; margin-bottom:1rem;">Starting at $1,000 CAD</p>
+          <a href="packages.html" style="
+            display:inline-block; font-size:0.82rem; font-weight:700;
+            color:var(--sage-dark); text-decoration:none;
+            border:1.5px solid var(--sage-light); padding:0.45rem 1rem;
+            border-radius:50px; transition:background 0.2s;
+          "
+          onmouseover="this.style.background='#EAF0E6';"
+          onmouseout="this.style.background='transparent';">View Details →</a>
+        </div>
+
+      </div>
+
+      <!-- Pricing note -->
+      <div style="
+        display:flex; align-items:flex-start; gap:0.8rem;
+        background:var(--sage-pale); border:1.5px solid var(--sage-light);
+        border-radius:14px; padding:1rem 1.4rem; margin-top:2rem;
+        max-width:680px;
+      ">
+        <span style="font-size:1.1rem; flex-shrink:0; margin-top:2px;">🔔</span>
+        <p style="font-size:0.83rem; color:var(--sage-dark); line-height:1.6;">
+          <strong>Heads up:</strong> All listed prices are starting rates. Final pricing is always confirmed during your free consultation call based on your event needs, number of children, and travel distance.
+          <a href="pricing.html" style="color:var(--sage-dark); font-weight:700;">See full pricing &amp; travel policy →</a>
+        </p>
+      </div>
+
+      <div style="margin-top:2rem; display:flex; gap:1rem; flex-wrap:wrap;">
+        <a href="packages.html" class="btn-primary">Explore All Packages</a>
+        <a href="pricing.html" class="btn-outline">View Pricing</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== LEAVE A REVIEW ========== -->
+  <section class="review-form-section" id="leave-review">
+    <div class="container">
+      <div class="review-form-inner">
+
+        <div class="review-form-left">
+          <div class="section-eyebrow">Share Your Experience</div>
+          <h2 class="section-title">How did we do?<br><em>Tell us your story</em></h2>
+          <p class="section-lead">
+            Your kind words mean the world to us — and help other families feel confident choosing Ninang's for their special day.
+          </p>
+          <a href="reviews.html" class="review-see-all">
+            See all reviews
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+
+        <div class="review-form-right">
+
+          <!-- Form state -->
+          <div id="reviewFormWrap">
+            <form id="reviewForm" novalidate>
+
+              <!-- Name -->
+              <div class="form-group">
+                <label for="rName">Your Name <span style="color:#c0392b">*</span></label>
+                <input type="text" id="rName" name="Name" placeholder="e.g. Maria Santos" autocomplete="name" />
+                <div class="field-error" id="rNameError">Please enter your name.</div>
+              </div>
+
+              <!-- Event Type -->
+              <div class="form-group">
+                <label for="rEvent">Event Type <span style="color:#c0392b">*</span></label>
+                <select id="rEvent" name="Event Type">
+                  <option value="" disabled selected>Select your event type</option>
+                  <option value="Wedding / Reception">Wedding / Reception</option>
+                  <option value="Birthday Party">Birthday Party</option>
+                  <option value="Debut / Milestone Party">Debut / Milestone Party</option>
+                  <option value="Corporate / Work Event">Corporate / Work Event</option>
+                  <option value="Christening / Baptism">Christening / Baptism</option>
+                  <option value="Other">Other</option>
+                </select>
+                <div class="field-error" id="rEventError">Please select your event type.</div>
+              </div>
+
+              <!-- Star Rating -->
+              <div class="form-group">
+                <label>Your Rating <span style="color:#c0392b">*</span></label>
+                <div class="star-picker" id="starPicker" role="group" aria-label="Star rating">
+                  <button type="button" class="star-btn" data-value="1" aria-label="1 star">★</button>
+                  <button type="button" class="star-btn" data-value="2" aria-label="2 stars">★</button>
+                  <button type="button" class="star-btn" data-value="3" aria-label="3 stars">★</button>
+                  <button type="button" class="star-btn" data-value="4" aria-label="4 stars">★</button>
+                  <button type="button" class="star-btn" data-value="5" aria-label="5 stars">★</button>
+                </div>
+                <input type="hidden" id="rRating" name="Rating" value="" />
+                <div class="field-error" id="rRatingError">Please select a star rating.</div>
+              </div>
+
+              <!-- Review -->
+              <div class="form-group">
+                <label for="rReview">Your Review <span style="color:#c0392b">*</span></label>
+                <textarea id="rReview" name="Review" placeholder="Tell us about your experience — what did the children enjoy most? How did our team make your event easier?" style="min-height:100px;"></textarea>
+                <div class="field-error" id="rReviewError">Please write a short review.</div>
+              </div>
+
+              <button type="submit" class="btn-primary review-submit-btn" id="reviewSubmitBtn">
+                <span id="reviewSubmitText">Submit My Review</span>
+                <div class="submit-spinner" id="reviewSpinner" style="display:none;width:16px;height:16px;border:2px solid rgba(255,253,246,0.3);border-top-color:#fffdf6;border-radius:50%;animation:spin 0.7s linear infinite;"></div>
+              </button>
+
+            </form>
+          </div>
+
+          <!-- Thank you state -->
+          <div id="reviewThankYou" style="display:none;" class="review-thankyou">
+            <div class="review-ty-icon">🌿</div>
+            <h3>Thank you so much!</h3>
+            <p>We truly appreciate you taking the time to share your experience. Your review has been received and will be shared on our Reviews page once approved.</p>
+            <a href="reviews.html" class="btn-outline" style="display:inline-block;margin-top:1rem;">See All Reviews</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== CTA ========== -->
+  <section class="cta-section" id="cta">
+    <div class="container">
+      <div class="section-eyebrow">Ready to Book?</div>
+      <h2 class="section-title">
+        Planning an event or need<br>
+        <em>trusted childcare support?</em>
+      </h2>
+      <p class="section-lead">
+        It all starts with a friendly consultation call — no commitment,
+        just a warm chat about what you need so we can tailor the perfect care for your event.
+      </p>
+
+      <div class="cta-pricing-note">
+        <span class="cta-pricing-icon">💬</span>
+        <div>
+          <strong>Pricing starts at CAD $500</strong>
+          <p>Every event is unique — final pricing is discussed during your free consultation call based on your specific needs.</p>
+        </div>
+      </div>
+
+      <div class="cta-buttons">
+        <a href="booking.html" class="btn-primary">Book a Consultation</a>
+        <a href="mailto:hello@ninangschildcare.com" class="btn-outline">Get in Touch</a>
+      </div>
+      <div class="cta-assurance">
+        <span>No upfront payment</span>
+        <span>Free consultation call</span>
+        <span>Price tailored to your needs</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <div class="footer-logo">Ninang's Childcare</div>
+    <p class="footer-tagline">Caring like family — wherever you go.</p>
+    <ul class="footer-links">
+      <li><a href="#offer">Services</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="packages.html">Packages</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="booking.html">Book Now</a></li>
+      <li><a href="mailto:hello@ninangschildcare.com">Contact</a></li>
+    </ul>
+    <p class="footer-copy">© 2025 Ninang's Childcare. All rights reserved.</p>
+  </footer>
+
+
+  <!-- ========== JAVASCRIPT ========== -->
+  <script src="main.js"></script>
+
+</body>
+</html>

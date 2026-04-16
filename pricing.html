@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing — Ninang's Childcare</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sage:        #7A9E7E;
+      --sage-light:  #A8C5A0;
+      --sage-dark:   #4E7254;
+      --sage-pale:   #EAF0E6;
+      --beige:       #D9CBAA;
+      --beige-light: #F0E8D5;
+      --beige-pale:  #FAF5EC;
+      --ivory:       #FFFDF6;
+      --brown:       #7C5C3E;
+      --brown-light: #A07850;
+      --brown-dark:  #4A3728;
+      --cream:       #F5ECD7;
+      --text-dark:   #2E2419;
+      --text-mid:    #5C4A36;
+      --text-muted:  #8C7A66;
+      --radius-sm:   8px;
+      --radius-md:   14px;
+      --radius-lg:   20px;
+      --radius-pill: 50px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--ivory);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ---- NAV ---- */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      height: 68px;
+      background: rgba(255,253,246,0.93);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--beige);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      transition: box-shadow 0.3s;
+    }
+
+    nav.scrolled { box-shadow: 0 4px 24px rgba(74,55,40,0.08); }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--brown-dark);
+      font-style: italic;
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--sage-dark); font-style: normal; }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-mid);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--sage-dark); }
+
+    .nav-cta {
+      background: var(--sage-dark) !important;
+      color: var(--ivory) !important;
+      padding: 0.48rem 1.2rem;
+      border-radius: var(--radius-pill);
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--brown) !important; }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--brown-dark);
+      border-radius: 2px;
+    }
+
+    .nav-drawer {
+      position: fixed;
+      top: 0; right: 0;
+      width: 280px; height: 100%;
+      background: var(--ivory);
+      z-index: 300;
+      padding: 2rem 1.5rem;
+      transform: translateX(100%);
+      transition: transform 0.35s ease;
+      box-shadow: -8px 0 40px rgba(74,55,40,0.12);
+    }
+
+    .nav-drawer.open { transform: translateX(0); }
+    .nav-drawer ul { list-style: none; margin-top: 3rem; display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .drawer-link {
+      display: block;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-mid);
+      text-decoration: none;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .drawer-link:hover { background: var(--sage-pale); color: var(--sage-dark); }
+    .drawer-cta { background: var(--sage-dark); color: var(--ivory) !important; text-align: center; margin-top: 1rem; border-radius: var(--radius-pill); }
+
+    .drawer-close {
+      position: absolute; top: 1.2rem; right: 1.2rem;
+      background: none; border: none; font-size: 1.6rem;
+      color: var(--text-muted); cursor: pointer;
+    }
+
+    .nav-overlay {
+      position: fixed; inset: 0;
+      background: rgba(46,36,25,0.4);
+      z-index: 250; opacity: 0; pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+
+    .nav-overlay.show { opacity: 1; pointer-events: all; }
+
+    /* ---- PAGE HERO ---- */
+    .page-hero {
+      background: var(--sage-dark);
+      padding: 7rem 2rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: -80px;
+      width: 460px; height: 460px;
+      border-radius: 50%;
+      background: rgba(255,253,246,0.06);
+      pointer-events: none;
+    }
+
+    .page-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; right: -60px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: rgba(74,55,40,0.12);
+      pointer-events: none;
+    }
+
+    .page-hero > * { position: relative; z-index: 2; }
+
+    .page-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,253,246,0.7);
+      margin-bottom: 1rem;
+    }
+
+    .page-eyebrow::before {
+      content: '';
+      display: block;
+      width: 22px; height: 2px;
+      background: rgba(255,253,246,0.5);
+      border-radius: 2px;
+    }
+
+    .page-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      color: var(--ivory);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .page-hero h1 em { color: var(--beige-light); font-style: italic; }
+
+    .page-hero p {
+      font-size: 1rem;
+      color: rgba(255,253,246,0.65);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+
+    /* ---- LAYOUT ---- */
+    .container { max-width: 1000px; margin: 0 auto; }
+
+    section { padding: 5rem 2rem; }
+
+    .section-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sage-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .section-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--sage);
+      border-radius: 2px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+      color: var(--brown-dark);
+      line-height: 1.2;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title em { color: var(--sage-dark); font-style: italic; }
+
+    .section-lead {
+      font-size: 0.97rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      max-width: 540px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ---- HOURLY RATES ---- */
+    .rates-section { background: var(--ivory); }
+
+    .rates-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+
+    .rate-card {
+      background: var(--beige-pale);
+      border: 1.5px solid var(--beige);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.8rem;
+      text-align: center;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .rate-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 44px rgba(74,55,40,0.1);
+    }
+
+    .rate-card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .rate-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--brown-dark);
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .rate-big {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem;
+      color: var(--sage-dark);
+      line-height: 1;
+    }
+
+    .rate-per {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    /* ---- NOTICE BOX ---- */
+    .pricing-notice {
+      background: var(--sage-pale);
+      border: 1.5px solid var(--sage-light);
+      border-radius: var(--radius-lg);
+      padding: 1.2rem 1.6rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    .pricing-notice-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+
+    .pricing-notice p {
+      font-size: 0.86rem;
+      color: var(--sage-dark);
+      line-height: 1.6;
+    }
+
+    .pricing-notice strong { font-weight: 700; }
+
+    /* ---- BUILD YOUR OWN ---- */
+    .custom-section { background: var(--cream); }
+
+    .custom-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .custom-visual {
+      background: var(--ivory);
+      border: 1.5px solid var(--beige);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: 0 6px 28px rgba(74,55,40,0.07);
+    }
+
+    .custom-visual h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--brown-dark);
+      margin-bottom: 1.2rem;
+    }
+
+    .custom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--beige);
+      font-size: 0.88rem;
+    }
+
+    .custom-row:last-child { border-bottom: none; }
+
+    .custom-row-label { color: var(--text-mid); }
+
+    .custom-row-value {
+      font-weight: 700;
+      color: var(--sage-dark);
+    }
+
+    .custom-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--beige);
+    }
+
+    .custom-total-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    .custom-total-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--brown-dark);
+    }
+
+    .custom-total-note {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-style: italic;
+      text-align: right;
+      margin-top: 0.3rem;
+    }
+
+    .btn-primary {
+      background: var(--sage-dark);
+      color: var(--ivory);
+      padding: 0.9rem 2rem;
+      border-radius: var(--radius-pill);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 1.5rem;
+      transition: background 0.22s, transform 0.15s;
+    }
+
+    .btn-primary:hover { background: var(--brown); transform: translateY(-2px); }
+
+    /* ---- TRAVEL POLICY ---- */
+    .travel-section { background: var(--beige-pale); }
+
+    .travel-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .travel-map {
+      background: var(--ivory);
+      border: 1.5px solid var(--beige);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 6px 28px rgba(74,55,40,0.07);
+    }
+
+    .travel-map-header {
+      background: var(--brown-dark);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .travel-map-header span {
+      font-size: 1rem;
+    }
+
+    .travel-map-header p {
+      font-size: 0.82rem;
+      color: rgba(255,253,246,0.7);
+      font-weight: 600;
+    }
+
+    .travel-zones {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .travel-zone {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--beige);
+    }
+
+    .travel-zone:last-child { border-bottom: none; }
+
+    .zone-dot {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .zone-dot.free    { background: var(--sage); }
+    .zone-dot.paid    { background: var(--brown-light); }
+    .zone-dot.special { background: #c0392b; }
+
+    .zone-label {
+      flex: 1;
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      font-weight: 600;
+    }
+
+    .zone-distance {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: block;
+      font-weight: 400;
+    }
+
+    .zone-rate {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--brown-dark);
+      text-align: right;
+    }
+
+    .zone-rate small {
+      display: block;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .travel-info { display: flex; flex-direction: column; gap: 1rem; }
+
+    .travel-info-card {
+      background: var(--ivory);
+      border: 1px solid var(--beige);
+      border-radius: var(--radius-md);
+      padding: 1.2rem 1.4rem;
+    }
+
+    .travel-info-card h4 {
+      font-weight: 700;
+      color: var(--brown-dark);
+      font-size: 0.9rem;
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .travel-info-card p {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ---- PACKAGES QUICK-LINK ---- */
+    .quick-packages {
+      background: var(--ivory);
+      border-top: 1px solid var(--beige);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .quick-packages p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .quick-packages a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--sage-dark);
+      text-decoration: none;
+      border: 2px solid var(--sage-light);
+      padding: 0.7rem 1.5rem;
+      border-radius: var(--radius-pill);
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .quick-packages a:hover { background: var(--sage-pale); border-color: var(--sage); }
+
+    /* ---- CTA STRIP ---- */
+    .cta-strip {
+      background: var(--brown-dark);
+      padding: 4rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-strip::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(122,158,126,0.1) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .cta-strip > * { position: relative; z-index: 2; }
+
+    .cta-strip h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+      color: var(--ivory);
+      margin-bottom: 0.8rem;
+    }
+
+    .cta-strip h2 em { color: var(--sage-light); font-style: italic; }
+
+    .cta-strip p {
+      font-size: 0.95rem;
+      color: rgba(255,253,246,0.6);
+      margin-bottom: 2rem;
+      max-width: 480px;
+      margin-left: auto; margin-right: auto;
+    }
+
+    .cta-strip-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    .btn-cta-primary {
+      background: var(--sage);
+      color: var(--ivory);
+      padding: 0.9rem 2rem;
+      border-radius: var(--radius-pill);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.22s, transform 0.15s;
+    }
+
+    .btn-cta-primary:hover { background: var(--sage-dark); transform: translateY(-2px); }
+
+    .btn-cta-ghost {
+      background: transparent;
+      color: var(--ivory);
+      padding: 0.9rem 2rem;
+      border-radius: var(--radius-pill);
+      border: 1.5px solid rgba(255,253,246,0.3);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.22s, border-color 0.22s, transform 0.15s;
+    }
+
+    .btn-cta-ghost:hover { background: rgba(255,253,246,0.08); border-color: rgba(255,253,246,0.55); transform: translateY(-2px); }
+
+    /* ---- FOOTER ---- */
+    footer {
+      background: var(--brown-dark);
+      border-top: 1px solid rgba(255,253,246,0.08);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--ivory); font-style: italic; margin-bottom: 0.4rem; }
+    .footer-tagline { font-size: 0.8rem; color: rgba(255,253,246,0.4); margin-bottom: 1.3rem; }
+    .footer-links { display: flex; gap: 1.8rem; justify-content: center; list-style: none; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .footer-links a { font-size: 0.8rem; color: rgba(255,253,246,0.45); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--sage-light); }
+    .footer-copy { font-size: 0.74rem; color: rgba(255,253,246,0.22); }
+
+    /* ---- ANIMATE ---- */
+    [data-animate] {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    [data-animate].is-visible { opacity: 1; transform: translateY(0); }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 860px) {
+      .rates-grid   { grid-template-columns: 1fr; }
+      .custom-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .travel-inner { grid-template-columns: 1fr; }
+      .nav-links    { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 4rem 1.25rem; }
+      .page-hero { padding: 6rem 1.25rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">Ninang's <span>Childcare</span></a>
+    <button class="nav-hamburger" id="hamburgerBtn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html#offer">Services</a></li>
+      <li><a href="index.html#why">About</a></li>
+      <li><a href="packages.html">Packages</a></li>
+      <li><a href="pricing.html" class="active">Pricing</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="booking.html" class="nav-cta">Book Now</a></li>
+    </ul>
+  </nav>
+
+  <div class="nav-drawer" id="navDrawer">
+    <button class="drawer-close" id="drawerClose">&times;</button>
+    <ul>
+      <li><a href="index.html#offer"  class="drawer-link">Services</a></li>
+      <li><a href="index.html#why"    class="drawer-link">About</a></li>
+      <li><a href="packages.html"     class="drawer-link">Packages</a></li>
+      <li><a href="pricing.html"      class="drawer-link">Pricing</a></li>
+      <li><a href="reviews.html"      class="drawer-link">Reviews</a></li>
+      <li><a href="booking.html"      class="drawer-link drawer-cta">Book Now</a></li>
+    </ul>
+  </div>
+  <div class="nav-overlay" id="navOverlay"></div>
+
+
+  <!-- ========== PAGE HERO ========== -->
+  <header class="page-hero">
+    <div class="page-eyebrow">Pricing</div>
+    <h1>Simple &amp; <em>Transparent</em> Pricing</h1>
+    <p>We believe parents should always know exactly what to expect. No hidden fees, no surprises — just honest, clear pricing discussed openly with you.</p>
+  </header>
+
+
+  <!-- ========== HOURLY RATES ========== -->
+  <section class="rates-section" id="rates">
+    <div class="container">
+      <div class="section-eyebrow">Hourly Childcare Rates</div>
+      <h2 class="section-title">Pay only for<br>the care you <em>need</em></h2>
+      <p class="section-lead">Our hourly rates are designed for flexibility. Mix and match caregivers based on your event size and duration.</p>
+
+      <div class="rates-grid">
+        <div class="rate-card" data-animate>
+          <span class="rate-card-icon">👤</span>
+          <h3>1 Caregiver</h3>
+          <div class="rate-big">$40</div>
+          <div class="rate-per">per hour</div>
+        </div>
+        <div class="rate-card" data-animate>
+          <span class="rate-card-icon">👥</span>
+          <h3>2 Caregivers</h3>
+          <div class="rate-big">$70</div>
+          <div class="rate-per">per hour</div>
+        </div>
+        <div class="rate-card" data-animate>
+          <span class="rate-card-icon">➕</span>
+          <h3>Each Additional Caregiver</h3>
+          <div class="rate-big">$30</div>
+          <div class="rate-per">per hour, per person</div>
+        </div>
+      </div>
+
+      <div class="pricing-notice" data-animate>
+        <span class="pricing-notice-icon">🔔</span>
+        <p>
+          <strong>Please note:</strong> These are base hourly rates. Final pricing for your event is always confirmed during your free consultation call — it may vary based on the number of children, event type, duration, add-ons, and travel distance. We will never surprise you with unexpected charges.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== BUILD YOUR OWN ========== -->
+  <section class="custom-section" id="custom">
+    <div class="container">
+      <div class="custom-inner">
+
+        <div data-animate>
+          <div class="section-eyebrow">Build-Your-Own Care Option</div>
+          <h2 class="section-title">Every family is<br><em>different</em></h2>
+          <p class="section-lead">
+            If our packages don't quite fit, we're happy to create a custom childcare plan just for you. Tell us your event details and we'll build a quote that works for your family — no pressure, no commitment.
+          </p>
+          <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.7; margin-bottom:1.2rem;">
+            Whether you need a single caregiver for two hours or a full team for an entire day, we'll put together exactly what you need. Our consultation call is the perfect place to talk through your options.
+          </p>
+          <a href="booking.html" class="btn-primary">Tell Us Your Event Details →</a>
+        </div>
+
+        <div class="custom-visual" data-animate>
+          <h4>Example Custom Quote</h4>
+          <div class="custom-row">
+            <span class="custom-row-label">2 Caregivers × 4 hrs</span>
+            <span class="custom-row-value">$280</span>
+          </div>
+          <div class="custom-row">
+            <span class="custom-row-label">1 Additional Caregiver × 4 hrs</span>
+            <span class="custom-row-value">$120</span>
+          </div>
+          <div class="custom-row">
+            <span class="custom-row-label">Sensory Play Station Add-On</span>
+            <span class="custom-row-value">TBD</span>
+          </div>
+          <div class="custom-row">
+            <span class="custom-row-label">Travel (35 km from base)</span>
+            <span class="custom-row-value">$10.50</span>
+          </div>
+          <div class="custom-total">
+            <span class="custom-total-label">Estimated Total</span>
+            <span class="custom-total-value">~$410+</span>
+          </div>
+          <p class="custom-total-note">Final price confirmed on consultation call</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== TRAVEL POLICY ========== -->
+  <section class="travel-section" id="travel">
+    <div class="container">
+      <div class="section-eyebrow">Travel Policy</div>
+      <h2 class="section-title">We come <em>to you</em> —<br>across the GTA</h2>
+      <p class="section-lead" style="margin-bottom:2.5rem;">
+        We proudly serve families across the Greater Toronto Area. Here's exactly how our travel fees work — no surprises.
+      </p>
+
+      <div class="travel-inner">
+
+        <div class="travel-map" data-animate>
+          <div class="travel-map-header">
+            <span>📍</span>
+            <p>GTA Travel Zones</p>
+          </div>
+          <div class="travel-zones">
+            <div class="travel-zone">
+              <div class="zone-dot free"></div>
+              <div>
+                <div class="zone-label">Free Zone</div>
+                <span class="zone-distance">First 20 km from our base</span>
+              </div>
+              <div class="zone-rate">
+                Free
+                <small>No charge</small>
+              </div>
+            </div>
+            <div class="travel-zone">
+              <div class="zone-dot paid"></div>
+              <div>
+                <div class="zone-label">Standard Travel</div>
+                <span class="zone-distance">20 km – 60 km</span>
+              </div>
+              <div class="zone-rate">
+                $0.70/km
+                <small>Per km after 20 km</small>
+              </div>
+            </div>
+            <div class="travel-zone">
+              <div class="zone-dot special"></div>
+              <div>
+                <div class="zone-label">Extended Travel</div>
+                <span class="zone-distance">Over 60 km</span>
+              </div>
+              <div class="zone-rate">
+                $0.70/km +
+                <small>Setup fee may apply</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="travel-info" data-animate>
+          <div class="travel-info-card">
+            <h4>📏 How we calculate distance</h4>
+            <p>Distance is measured from our base location to your event venue using the most direct route. We'll confirm the exact travel charge during your consultation call before any booking is finalized.</p>
+          </div>
+          <div class="travel-info-card">
+            <h4>🏙️ Areas we serve</h4>
+            <p>We proudly serve Toronto, Mississauga, Brampton, Vaughan, Markham, Scarborough, Etobicoke, North York, Pickering, and surrounding GTA communities.</p>
+          </div>
+          <div class="travel-info-card">
+            <h4>⚠️ Events over 60 km</h4>
+            <p>For events more than 60 km away, an additional setup fee may be required. This will be discussed transparently during your consultation — we'll always give you the full picture before you commit.</p>
+          </div>
+          <div class="travel-info-card">
+            <h4>💡 No travel surprises</h4>
+            <p>We never charge travel fees without telling you first. Every quote we send includes an itemized travel cost so you always know exactly what you're paying for.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== PACKAGES QUICK-LINK ========== -->
+  <div class="quick-packages">
+    <p>Want to see our pre-built packages with included features and starting prices?</p>
+    <a href="packages.html">
+      View Our Packages
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+
+
+  <!-- ========== CTA STRIP ========== -->
+  <section class="cta-strip">
+    <h2>Ready to get a<br><em>custom quote?</em></h2>
+    <p>Book a free consultation call and we'll walk you through everything — pricing, caregivers, activities, and travel — tailored to your event.</p>
+    <div class="cta-strip-btns">
+      <a href="booking.html" class="btn-cta-primary">Book a Free Consultation</a>
+      <a href="packages.html" class="btn-cta-ghost">Browse Packages</a>
+    </div>
+  </section>
+
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <div class="footer-logo">Ninang's Childcare</div>
+    <p class="footer-tagline">Caring like family — wherever you go.</p>
+    <ul class="footer-links">
+      <li><a href="index.html#offer">Services</a></li>
+      <li><a href="index.html#why">About</a></li>
+      <li><a href="packages.html">Packages</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="booking.html">Book Now</a></li>
+    </ul>
+    <p class="footer-copy">© 2025 Ninang's Childcare. All rights reserved.</p>
+  </footer>
+
+
+  <script>
+    /* ---- Navbar ---- */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    /* ---- Mobile drawer ---- */
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navDrawer    = document.getElementById('navDrawer');
+    const drawerClose  = document.getElementById('drawerClose');
+    const navOverlay   = document.getElementById('navOverlay');
+
+    function openDrawer()  { navDrawer.classList.add('open'); navOverlay.classList.add('show'); document.body.style.overflow = 'hidden'; }
+    function closeDrawer() { navDrawer.classList.remove('open'); navOverlay.classList.remove('show'); document.body.style.overflow = ''; }
+
+    hamburgerBtn.addEventListener('click', openDrawer);
+    drawerClose.addEventListener('click', closeDrawer);
+    navOverlay.addEventListener('click', closeDrawer);
+    document.querySelectorAll('.drawer-link').forEach(l => l.addEventListener('click', closeDrawer));
+
+    /* ---- Scroll animations ---- */
+    const animEls = document.querySelectorAll('[data-animate]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const siblings = [...entry.target.parentElement.querySelectorAll('[data-animate]')];
+          const idx = siblings.indexOf(entry.target);
+          entry.target.style.transitionDelay = (idx * 90) + 'ms';
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    animEls.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

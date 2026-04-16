@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book a Consultation — Ninang's Childcare</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* ---- RESET & VARIABLES ---- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sage:        #7A9E7E;
+      --sage-light:  #A8C5A0;
+      --sage-dark:   #4E7254;
+      --sage-pale:   #EAF0E6;
+      --beige:       #D9CBAA;
+      --beige-light: #F0E8D5;
+      --beige-pale:  #FAF5EC;
+      --ivory:       #FFFDF6;
+      --brown:       #7C5C3E;
+      --brown-light: #A07850;
+      --brown-dark:  #4A3728;
+      --cream:       #F5ECD7;
+      --text-dark:   #2E2419;
+      --text-mid:    #5C4A36;
+      --text-muted:  #8C7A66;
+
+      --radius-sm:   8px;
+      --radius-md:   14px;
+      --radius-lg:   20px;
+      --radius-pill: 50px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--ivory);
+      color: var(--text-dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ---- NAVBAR ---- */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 68px;
+      background: rgba(255, 253, 246, 0.95);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--beige);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--brown-dark);
+      font-style: italic;
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--sage-dark); font-style: normal; }
+
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-mid);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover { color: var(--sage-dark); }
+
+    .nav-back svg {
+      width: 16px; height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ---- PAGE WRAPPER ---- */
+    .page {
+      padding-top: 68px;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* ---- LEFT PANEL ---- */
+    .panel-left {
+      background: var(--brown-dark);
+      padding: 5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel-left::before {
+      content: '';
+      position: absolute;
+      top: -120px; left: -80px;
+      width: 420px; height: 420px;
+      border-radius: 50%;
+      background: rgba(122, 158, 126, 0.12);
+      pointer-events: none;
+    }
+
+    .panel-left::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; right: -60px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: rgba(160, 120, 80, 0.1);
+      pointer-events: none;
+    }
+
+    .panel-left > * { position: relative; z-index: 2; }
+
+    .panel-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sage-light);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .panel-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--sage-light);
+      border-radius: 2px;
+    }
+
+    .panel-left h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      color: var(--ivory);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .panel-left h1 em {
+      font-style: italic;
+      color: var(--sage-light);
+    }
+
+    .panel-left > p {
+      font-size: 0.95rem;
+      color: rgba(255, 253, 246, 0.65);
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+      max-width: 380px;
+    }
+
+    /* How it works steps */
+    .how-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .how-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: rgba(168, 197, 160, 0.2);
+      border: 1.5px solid var(--sage-light);
+      color: var(--sage-light);
+      font-size: 0.78rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-text strong {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--ivory);
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .step-text p {
+      font-size: 0.8rem;
+      color: rgba(255, 253, 246, 0.5);
+      line-height: 1.5;
+    }
+
+    /* Pricing pill */
+    .pricing-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(255, 253, 246, 0.06);
+      border: 1px solid rgba(255, 253, 246, 0.14);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.3rem;
+      max-width: 340px;
+    }
+
+    .pricing-pill-icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .pricing-pill strong {
+      display: block;
+      font-size: 0.92rem;
+      color: var(--ivory);
+      font-weight: 700;
+    }
+
+    .pricing-pill p {
+      font-size: 0.78rem;
+      color: rgba(255, 253, 246, 0.5);
+      line-height: 1.45;
+      margin-top: 0.15rem;
+    }
+
+    /* ---- RIGHT PANEL — FORM ---- */
+    .panel-right {
+      background: var(--ivory);
+      padding: 5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .form-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .form-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--brown-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-header p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Form fields */
+    .form-group {
+      margin-bottom: 1.3rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-mid);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 0.45rem;
+    }
+
+    .form-group label .optional {
+      font-weight: 400;
+      font-style: italic;
+      text-transform: none;
+      letter-spacing: 0;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: var(--beige-pale);
+      border: 1.5px solid var(--beige);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1rem;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.92rem;
+      color: var(--text-dark);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      resize: vertical;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--sage);
+      box-shadow: 0 0 0 3px rgba(122, 158, 126, 0.15);
+      background: var(--ivory);
+    }
+
+    .form-group input.error,
+    .form-group textarea.error {
+      border-color: #c0392b;
+      box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.1);
+    }
+
+    .field-error {
+      font-size: 0.78rem;
+      color: #c0392b;
+      margin-top: 0.3rem;
+      display: none;
+    }
+
+    .field-error.show { display: block; }
+
+    .form-group textarea {
+      min-height: 110px;
+    }
+
+    /* Submit button */
+    .form-submit {
+      width: 100%;
+      background: var(--sage-dark);
+      color: var(--ivory);
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 1rem 2rem;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      transition: background 0.2s, transform 0.15s;
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+    }
+
+    .form-submit:hover {
+      background: var(--brown);
+      transform: translateY(-2px);
+    }
+
+    .form-submit:disabled {
+      background: var(--sage-light);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .submit-spinner {
+      width: 18px; height: 18px;
+      border: 2.5px solid rgba(255,253,246,0.3);
+      border-top-color: var(--ivory);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .form-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 1rem;
+      line-height: 1.5;
+    }
+
+    .form-note a {
+      color: var(--sage-dark);
+      text-decoration: none;
+    }
+
+    /* ---- SUCCESS STATE ---- */
+    .success-panel {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 2rem;
+      animation: fadeInUp 0.5s ease both;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .success-icon {
+      width: 72px; height: 72px;
+      background: var(--sage-pale);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      border: 3px solid var(--sage-light);
+    }
+
+    .success-panel h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--brown-dark);
+      margin-bottom: 0.8rem;
+    }
+
+    .success-panel > p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 360px;
+      margin-bottom: 1.8rem;
+    }
+
+    .success-call-box {
+      background: var(--sage-pale);
+      border: 1.5px solid var(--sage-light);
+      border-radius: var(--radius-lg);
+      padding: 1.2rem 1.8rem;
+      margin-bottom: 1.8rem;
+      width: 100%;
+      max-width: 360px;
+    }
+
+    .success-call-box p {
+      font-size: 0.82rem;
+      color: var(--sage-dark);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .success-call-box span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .success-assurance {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+      max-width: 340px;
+      margin-bottom: 2rem;
+    }
+
+    .success-assurance-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.83rem;
+      color: var(--text-mid);
+    }
+
+    .success-assurance-item::before {
+      content: '✓';
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      background: var(--sage-pale);
+      color: var(--sage-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .btn-back-home {
+      display: inline-block;
+      background: var(--sage-dark);
+      color: var(--ivory);
+      padding: 0.8rem 2rem;
+      border-radius: var(--radius-pill);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-back-home:hover {
+      background: var(--brown);
+      transform: translateY(-2px);
+    }
+
+    /* ---- FOOTER ---- */
+    .booking-footer {
+      background: var(--brown-dark);
+      border-top: 1px solid rgba(255,253,246,0.08);
+      padding: 1.5rem 2rem;
+      text-align: center;
+    }
+
+    .booking-footer p {
+      font-size: 0.76rem;
+      color: rgba(255,253,246,0.3);
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 860px) {
+      .page {
+        grid-template-columns: 1fr;
+      }
+
+      .panel-left {
+        padding: 4rem 2rem 3rem;
+      }
+
+      .panel-right {
+        padding: 3rem 2rem 4rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav { padding: 0 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">Ninang's <span>Childcare</span></a>
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to Home
+    </a>
+  </nav>
+
+  <!-- MAIN PAGE GRID -->
+  <div class="page">
+
+    <!-- LEFT — info panel -->
+    <div class="panel-left">
+      <div class="panel-eyebrow">Start Here</div>
+      <h1>Book Your Free<br><em>Consultation Call</em></h1>
+      <p>
+        Before we confirm anything, we'd love to have a quick phone call to understand your event,
+        your children's needs, and how we can best support you. Leave your details and we'll reach out to you.
+      </p>
+
+      <div class="how-steps">
+        <div class="how-step">
+          <div class="step-num">1</div>
+          <div class="step-text">
+            <strong>Submit this form</strong>
+            <p>Just your name, number, and a little about what you need — that's it.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <strong>We call you within the day</strong>
+            <p>A member of our team will reach out to discuss your event details and answer any questions.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="step-num">3</div>
+          <div class="step-text">
+            <strong>We tailor a plan for you</strong>
+            <p>Based on your needs, we put together the right team, activities, and pricing — just for you.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pricing-pill">
+        <div class="pricing-pill-icon">💰</div>
+        <div>
+          <strong>Starting at CAD $500</strong>
+          <p>Pricing is customized per event — no fixed packages, no surprises. We'll walk you through everything on the call.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT — form panel -->
+    <div class="panel-right">
+
+      <!-- FORM VIEW -->
+      <div id="formView">
+        <div class="form-header">
+          <h2>Tell us about yourself</h2>
+          <p>Fields marked <strong>*</strong> are required. We'll never share your details with anyone.</p>
+        </div>
+
+        <form id="bookingForm" novalidate>
+
+          <!-- Full Name -->
+          <div class="form-group">
+            <label for="fullName">Full Name <span style="color:#c0392b">*</span></label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              placeholder="e.g. Maria Santos"
+              autocomplete="name"
+            />
+            <div class="field-error" id="fullNameError">Please enter your full name.</div>
+          </div>
+
+          <!-- Phone Number -->
+          <div class="form-group">
+            <label for="phone">Phone Number <span style="color:#c0392b">*</span></label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="e.g. +1 (416) 555-0123"
+              autocomplete="tel"
+            />
+            <div class="field-error" id="phoneError">Please enter a valid phone number so we can call you.</div>
+          </div>
+
+          <!-- Email (optional) -->
+          <div class="form-group">
+            <label for="email">
+              Email Address
+              <span class="optional">&nbsp;— optional</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="e.g. maria@email.com"
+              autocomplete="email"
+            />
+            <div class="field-error" id="emailError">Please enter a valid email address.</div>
+          </div>
+
+          <!-- Short Inquiry (optional) -->
+          <div class="form-group">
+            <label for="inquiry">
+              Short Inquiry
+              <span class="optional">&nbsp;— optional</span>
+            </label>
+            <textarea
+              id="inquiry"
+              name="inquiry"
+              placeholder="e.g. Wedding reception on July 12, expecting around 8 children aged 2–9. Looking for 2 caregivers for 6 hours."
+            ></textarea>
+          </div>
+
+          <button type="submit" class="form-submit" id="submitBtn">
+            <span id="submitText">Request a Consultation Call</span>
+            <div class="submit-spinner" id="submitSpinner"></div>
+          </button>
+
+          <p class="form-note">
+            By submitting, you agree to be contacted by Ninang's Childcare regarding your inquiry.
+            Questions? Email us at <a href="/cdn-cgi/l/email-protection#1b737e7777745b7572757a757c68787372777f787a697e35787476"><span class="__cf_email__" data-cfemail="1f777a7373705f7176717e71786c7c7776737b7c7e6d7a317c7072">[email&#160;protected]</span></a>
+          </p>
+
+        </form>
+      </div>
+
+      <!-- SUCCESS VIEW (hidden until form submitted) -->
+      <div class="success-panel" id="successView">
+        <div class="success-icon">🌿</div>
+        <h2>Thank You!</h2>
+        <p>
+          We've received your request and will be calling you within the day to chat about your event needs.
+          Please keep your phone nearby!
+        </p>
+
+        <div class="success-call-box">
+          <p>📞 Expect a call from us today</p>
+          <span>Our team will reach out during business hours (9am–7pm) to discuss your event and tailor the right care plan for you.</span>
+        </div>
+
+        <div class="success-assurance">
+          <div class="success-assurance-item">No commitment required from this inquiry</div>
+          <div class="success-assurance-item">Pricing discussed openly on the call</div>
+          <div class="success-assurance-item">All caregivers are vetted &amp; CPR-trained</div>
+        </div>
+
+        <a href="index.html" class="btn-back-home">Back to Homepage</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="booking-footer">
+    <p>© 2025 Ninang's Childcare. All rights reserved. &nbsp;|&nbsp; Caring like family — wherever you go.</p>
+  </footer>
+
+
+  <script>
+    /* ============================================================
+       NINANG'S CHILDCARE — Booking Form (Formspree Integration)
+       ============================================================
+
+       HOW TO CONNECT TO FORMSPREE + GOOGLE SHEETS:
+       -----------------------------------------------
+       STEP 1 — Sign up free at https://formspree.io
+       STEP 2 — Create a new form project in Formspree dashboard
+       STEP 3 — Copy your unique endpoint URL (looks like:
+                 https://formspree.io/f/xabcdefg)
+       STEP 4 — Replace the FORMSPREE_ENDPOINT value below
+                 with YOUR endpoint URL
+       STEP 5 — In Formspree dashboard → Integrations →
+                 connect Google Sheets. Every submission will
+                 automatically land as a new row in your sheet!
+       ============================================================ */
+
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xaqawgaw';
+    //                                                   ^^^^^^^^^^^
+    //                          Replace this with your actual Formspree form ID
+
+    /* --- DOM refs --- */
+    const form        = document.getElementById('bookingForm');
+    const submitBtn   = document.getElementById('submitBtn');
+    const submitText  = document.getElementById('submitText');
+    const spinner     = document.getElementById('submitSpinner');
+    const formView    = document.getElementById('formView');
+    const successView = document.getElementById('successView');
+
+    /* --- Helpers --- */
+    function showError(fieldId, errorId, show) {
+      const field = document.getElementById(fieldId);
+      const error = document.getElementById(errorId);
+      if (show) {
+        field.classList.add('error');
+        error.classList.add('show');
+      } else {
+        field.classList.remove('error');
+        error.classList.remove('show');
+      }
+    }
+
+    function isValidPhone(val) {
+      return /^[+]?[\d\s\-().]{7,20}$/.test(val.trim());
+    }
+
+    function isValidEmail(val) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim());
+    }
+
+    /* --- Live validation — clear errors as user types --- */
+    document.getElementById('fullName').addEventListener('input', () => {
+      showError('fullName', 'fullNameError', false);
+    });
+    document.getElementById('phone').addEventListener('input', () => {
+      showError('phone', 'phoneError', false);
+    });
+    document.getElementById('email').addEventListener('input', () => {
+      showError('email', 'emailError', false);
+    });
+
+    /* --- Submit handler --- */
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const name    = document.getElementById('fullName').value.trim();
+      const phone   = document.getElementById('phone').value.trim();
+      const email   = document.getElementById('email').value.trim();
+      const inquiry = document.getElementById('inquiry').value.trim();
+      let   isValid = true;
+
+      /* Validate required fields */
+      if (!name) {
+        showError('fullName', 'fullNameError', true);
+        isValid = false;
+      }
+      if (!phone || !isValidPhone(phone)) {
+        showError('phone', 'phoneError', true);
+        isValid = false;
+      }
+      if (email && !isValidEmail(email)) {
+        showError('email', 'emailError', true);
+        isValid = false;
+      }
+
+      if (!isValid) return;
+
+      /* Loading state */
+      submitBtn.disabled        = true;
+      submitText.textContent    = 'Sending your request…';
+      spinner.style.display     = 'block';
+
+      /* Build payload — Formspree reads these field names as column headers in Google Sheets */
+      const payload = {
+        'Full Name'     : name,
+        'Phone Number'  : phone,
+        'Email'         : email   || 'Not provided',
+        'Inquiry'       : inquiry || 'Not provided',
+        'Submitted At'  : new Date().toLocaleString('en-CA', {
+                            timeZone    : 'America/Toronto',
+                            dateStyle   : 'medium',
+                            timeStyle   : 'short'
+                          })
+      };
+
+      try {
+        const response = await fetch(FORMSPREE_ENDPOINT, {
+          method  : 'POST',
+          headers : { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body    : JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+          /* Success — show thank you screen */
+          formView.style.display    = 'none';
+          successView.style.display = 'flex';
+          successView.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          /* Formspree returned an error */
+          const data = await response.json();
+          const msg  = (data && data.errors)
+            ? data.errors.map(err => err.message).join(', ')
+            : 'Something went wrong. Please try again or call us directly.';
+          showSubmitError(msg);
+        }
+
+      } catch (networkError) {
+        /* Network failure */
+        showSubmitError('Unable to send — please check your connection and try again, or call us directly.');
+      }
+    });
+
+    /* Show a general submission error below the button */
+    function showSubmitError(msg) {
+      submitBtn.disabled     = false;
+      submitText.textContent = 'Request a Consultation Call';
+      spinner.style.display  = 'none';
+
+      let errEl = document.getElementById('submitGeneralError');
+      if (!errEl) {
+        errEl            = document.createElement('p');
+        errEl.id         = 'submitGeneralError';
+        errEl.style.cssText = 'color:#c0392b;font-size:0.82rem;margin-top:0.75rem;text-align:center;line-height:1.5;';
+        submitBtn.insertAdjacentElement('afterend', errEl);
+      }
+      errEl.textContent = msg;
+    }
+
+
+    /* --- Navbar scroll shadow --- */
+    const navbar = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      navbar.style.boxShadow = window.scrollY > 10
+        ? '0 4px 24px rgba(74,55,40,0.08)'
+        : 'none';
+    }, { passive: true });
+
+  </script>
+
+</body>
+</html>
