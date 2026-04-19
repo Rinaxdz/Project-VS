@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pricing — Ninang's Childcare</title>
+  <title>Packages &amp; Pricing — Ninang's On-The-Go Tots</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;500;600;700&display=swap"
     rel="stylesheet"
@@ -42,7 +42,7 @@
       overflow-x: hidden;
     }
 
-    /* ---- NAV ---- */
+    /* ========== NAV ========== */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -55,31 +55,65 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 2.5rem;
+      padding: 0 2rem;
       transition: box-shadow 0.3s;
     }
 
     nav.scrolled { box-shadow: 0 4px 24px rgba(74,55,40,0.08); }
 
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.35rem;
-      color: var(--brown-dark);
-      font-style: italic;
+    .nav-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
       text-decoration: none;
     }
 
-    .nav-logo span { color: var(--sage-dark); font-style: normal; }
+    .nav-logo-img {
+      height: 38px;
+      width: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--beige);
+      display: block;
+      /* Placeholder shown when no image src — replaced once logo is uploaded */
+      background: var(--sage-pale);
+    }
+
+    .nav-logo-img.placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .nav-logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--brown-dark);
+      font-style: italic;
+      line-height: 1.2;
+    }
+
+    .nav-logo-text span {
+      display: block;
+      font-size: 0.65rem;
+      font-style: normal;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sage-dark);
+    }
 
     .nav-links {
       display: flex;
-      gap: 1.8rem;
+      gap: 1.6rem;
       list-style: none;
       align-items: center;
     }
 
     .nav-links a {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 600;
       color: var(--text-mid);
       text-decoration: none;
@@ -94,7 +128,7 @@
     .nav-cta {
       background: var(--sage-dark) !important;
       color: var(--ivory) !important;
-      padding: 0.48rem 1.2rem;
+      padding: 0.45rem 1.1rem;
       border-radius: var(--radius-pill);
       transition: background 0.2s !important;
     }
@@ -131,7 +165,14 @@
     }
 
     .nav-drawer.open { transform: translateX(0); }
-    .nav-drawer ul { list-style: none; margin-top: 3rem; display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .nav-drawer ul {
+      list-style: none;
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
 
     .drawer-link {
       display: block;
@@ -145,12 +186,19 @@
     }
 
     .drawer-link:hover { background: var(--sage-pale); color: var(--sage-dark); }
-    .drawer-cta { background: var(--sage-dark); color: var(--ivory) !important; text-align: center; margin-top: 1rem; border-radius: var(--radius-pill); }
+
+    .drawer-cta {
+      background: var(--sage-dark);
+      color: var(--ivory) !important;
+      text-align: center;
+      margin-top: 1rem;
+      border-radius: var(--radius-pill);
+    }
 
     .drawer-close {
       position: absolute; top: 1.2rem; right: 1.2rem;
-      background: none; border: none; font-size: 1.6rem;
-      color: var(--text-muted); cursor: pointer;
+      background: none; border: none;
+      font-size: 1.6rem; color: var(--text-muted); cursor: pointer;
     }
 
     .nav-overlay {
@@ -162,10 +210,10 @@
 
     .nav-overlay.show { opacity: 1; pointer-events: all; }
 
-    /* ---- PAGE HERO ---- */
+    /* ========== PAGE HERO ========== */
     .page-hero {
       background: var(--sage-dark);
-      padding: 7rem 2rem 5rem;
+      padding: 7rem 2rem 4.5rem;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -175,7 +223,7 @@
       content: '';
       position: absolute;
       top: -100px; left: -80px;
-      width: 460px; height: 460px;
+      width: 420px; height: 420px;
       border-radius: 50%;
       background: rgba(255,253,246,0.06);
       pointer-events: none;
@@ -185,7 +233,7 @@
       content: '';
       position: absolute;
       bottom: -60px; right: -60px;
-      width: 320px; height: 320px;
+      width: 300px; height: 300px;
       border-radius: 50%;
       background: rgba(74,55,40,0.12);
       pointer-events: none;
@@ -197,19 +245,19 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 700;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: rgba(255,253,246,0.7);
-      margin-bottom: 1rem;
+      color: rgba(255,253,246,0.65);
+      margin-bottom: 0.9rem;
     }
 
-    .page-eyebrow::before {
+    .page-eyebrow::before, .page-eyebrow::after {
       content: '';
       display: block;
-      width: 22px; height: 2px;
-      background: rgba(255,253,246,0.5);
+      width: 20px; height: 2px;
+      background: rgba(255,253,246,0.4);
       border-radius: 2px;
     }
 
@@ -218,40 +266,68 @@
       font-size: clamp(2rem, 4vw, 3.2rem);
       color: var(--ivory);
       line-height: 1.2;
-      margin-bottom: 1rem;
+      margin-bottom: 0.9rem;
     }
 
     .page-hero h1 em { color: var(--beige-light); font-style: italic; }
 
     .page-hero p {
-      font-size: 1rem;
-      color: rgba(255,253,246,0.65);
-      max-width: 520px;
+      font-size: 0.97rem;
+      color: rgba(255,253,246,0.62);
+      max-width: 500px;
       margin: 0 auto;
-      line-height: 1.75;
+      line-height: 1.72;
     }
 
-    /* ---- LAYOUT ---- */
-    .container { max-width: 1000px; margin: 0 auto; }
+    /* Sticky section tabs */
+    .page-tabs {
+      background: var(--ivory);
+      border-bottom: 1px solid var(--beige);
+      display: flex;
+      justify-content: center;
+      position: sticky;
+      top: 68px;
+      z-index: 100;
+    }
+
+    .page-tab {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.9rem 1.6rem;
+      border-bottom: 3px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+
+    .page-tab:hover { color: var(--sage-dark); }
+    .page-tab.active { color: var(--sage-dark); border-bottom-color: var(--sage-dark); }
+
+    /* ========== SHARED ========== */
+    .container { max-width: 1040px; margin: 0 auto; }
 
     section { padding: 5rem 2rem; }
 
     .section-eyebrow {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--sage-dark);
       display: flex;
       align-items: center;
-      gap: 0.6rem;
-      margin-bottom: 0.7rem;
+      gap: 0.55rem;
+      margin-bottom: 0.6rem;
     }
 
     .section-eyebrow::before {
       content: '';
       display: block;
-      width: 24px; height: 2px;
+      width: 22px; height: 2px;
       background: var(--sage);
       border-radius: 2px;
     }
@@ -261,92 +337,360 @@
       font-size: clamp(1.7rem, 2.8vw, 2.4rem);
       color: var(--brown-dark);
       line-height: 1.2;
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.7rem;
     }
 
     .section-title em { color: var(--sage-dark); font-style: italic; }
 
     .section-lead {
-      font-size: 0.97rem;
+      font-size: 0.95rem;
       color: var(--text-muted);
       line-height: 1.75;
       max-width: 540px;
-      margin-bottom: 2.5rem;
     }
 
-    /* ---- HOURLY RATES ---- */
-    .rates-section { background: var(--ivory); }
+    /* ========== PACKAGES + RATES (combined) ========== */
+    .packages-rates-section { background: var(--ivory); }
 
-    .rates-grid {
+    /* Package cards */
+    .pkg-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.2rem;
+      gap: 1.3rem;
+      margin-top: 2.5rem;
+      margin-bottom: 3.5rem;
     }
 
-    .rate-card {
+    .pkg-card {
       background: var(--beige-pale);
       border: 1.5px solid var(--beige);
       border-radius: var(--radius-lg);
-      padding: 2rem 1.8rem;
-      text-align: center;
+      padding: 1.8rem 1.6rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
       transition: transform 0.25s, box-shadow 0.25s;
     }
 
-    .rate-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 14px 44px rgba(74,55,40,0.1);
+    .pkg-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(74,55,40,0.1);
     }
 
-    .rate-card-icon {
-      font-size: 1.8rem;
-      margin-bottom: 0.8rem;
-      display: block;
+    .pkg-card.featured {
+      background: var(--brown-dark);
+      border-color: var(--brown);
     }
+
+    .pkg-card.featured::before {
+      content: 'Most Popular';
+      position: absolute;
+      top: 1rem; right: -2.4rem;
+      background: var(--sage-dark);
+      color: var(--ivory);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.28rem 3rem;
+      transform: rotate(38deg);
+    }
+
+    .pkg-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sage-dark);
+      background: var(--sage-pale);
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-pill);
+      margin-bottom: 0.75rem;
+      width: fit-content;
+    }
+
+    .pkg-card.featured .pkg-tag {
+      background: rgba(168,197,160,0.18);
+      color: var(--sage-light);
+    }
+
+    .pkg-meaning {
+      font-size: 0.72rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .pkg-card.featured .pkg-meaning { color: rgba(255,253,246,0.45); }
+
+    .pkg-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--brown-dark);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .pkg-card.featured .pkg-name { color: var(--ivory); }
+
+    .pkg-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+      margin-bottom: 1.4rem;
+    }
+
+    .pkg-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.55rem;
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      line-height: 1.4;
+    }
+
+    .pkg-card.featured .pkg-features li { color: rgba(255,253,246,0.78); }
+
+    .pkg-features li::before {
+      content: '✓';
+      flex-shrink: 0;
+      width: 16px; height: 16px;
+      background: var(--sage-pale);
+      color: var(--sage-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+
+    .pkg-card.featured .pkg-features li::before {
+      background: rgba(168,197,160,0.2);
+      color: var(--sage-light);
+    }
+
+    .pkg-price-block {
+      border-top: 1px solid var(--beige);
+      padding-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .pkg-card.featured .pkg-price-block { border-color: rgba(255,253,246,0.12); }
+
+    .pkg-starting-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.15rem;
+    }
+
+    .pkg-card.featured .pkg-starting-label { color: rgba(255,253,246,0.4); }
+
+    .pkg-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      color: var(--sage-dark);
+      line-height: 1;
+    }
+
+    .pkg-card.featured .pkg-price { color: var(--sage-light); }
+
+    .pkg-price sub {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      vertical-align: baseline;
+      margin-left: 3px;
+    }
+
+    .pkg-card.featured .pkg-price sub { color: rgba(255,253,246,0.38); }
+
+    .btn-pkg {
+      display: block;
+      text-align: center;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-pill);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s, border-color 0.2s;
+    }
+
+    .btn-pkg-outline {
+      border: 2px solid var(--beige);
+      color: var(--brown-dark);
+    }
+
+    .btn-pkg-outline:hover { border-color: var(--sage); background: var(--sage-pale); transform: translateY(-2px); }
+
+    .btn-pkg-primary { background: var(--sage); color: var(--ivory); border: 2px solid transparent; }
+    .btn-pkg-primary:hover { background: var(--sage-dark); transform: translateY(-2px); }
+
+    /* ── Divider between packages and rates ── */
+    .rates-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .rates-divider::before, .rates-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--beige);
+    }
+
+    .rates-divider-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    /* Hourly rate cards */
+    .rates-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .rate-card {
+      background: var(--cream);
+      border: 1.5px solid var(--beige);
+      border-radius: var(--radius-lg);
+      padding: 1.6rem 1.4rem;
+      text-align: center;
+      transition: transform 0.22s, box-shadow 0.22s;
+    }
+
+    .rate-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 36px rgba(74,55,40,0.09);
+    }
+
+    .rate-icon { font-size: 1.6rem; margin-bottom: 0.65rem; display: block; }
 
     .rate-card h3 {
       font-family: 'Playfair Display', serif;
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: var(--brown-dark);
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
       line-height: 1.3;
     }
 
     .rate-big {
       font-family: 'Playfair Display', serif;
-      font-size: 2.6rem;
+      font-size: 2.4rem;
       color: var(--sage-dark);
       line-height: 1;
     }
 
-    .rate-per {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 0.3rem;
+    .rate-currency {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--sage);
+      vertical-align: super;
+      font-style: normal;
     }
 
-    /* ---- NOTICE BOX ---- */
-    .pricing-notice {
+    .rate-per {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+      font-weight: 600;
+    }
+
+    /* Mix & Match note */
+    .mix-match-note {
       background: var(--sage-pale);
       border: 1.5px solid var(--sage-light);
       border-radius: var(--radius-lg);
-      padding: 1.2rem 1.6rem;
+      padding: 1.1rem 1.5rem;
       display: flex;
       align-items: flex-start;
-      gap: 0.9rem;
-      margin-top: 2rem;
+      gap: 0.8rem;
     }
 
-    .pricing-notice-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+    .mix-match-note-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
 
-    .pricing-notice p {
+    .mix-match-note p {
       font-size: 0.86rem;
       color: var(--sage-dark);
       line-height: 1.6;
     }
 
-    .pricing-notice strong { font-weight: 700; }
+    .mix-match-note strong { font-weight: 700; }
 
-    /* ---- BUILD YOUR OWN ---- */
+    /* Pricing disclaimer */
+    .pricing-disclaimer {
+      background: var(--beige-pale);
+      border: 1px solid var(--beige);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1.3rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-top: 1.2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+    }
+
+    .pricing-disclaimer::before { content: '🔔'; flex-shrink: 0; font-size: 0.9rem; }
+
+    /* Add-ons */
+    .addons-strip {
+      background: var(--beige-pale);
+      border: 1.5px solid var(--beige);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 1.8rem;
+      margin-top: 2rem;
+    }
+
+    .addons-strip h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--brown-dark);
+      margin-bottom: 0.9rem;
+    }
+
+    .addons-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .addon-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--ivory);
+      border: 1px solid var(--beige);
+      border-radius: var(--radius-pill);
+      padding: 0.35rem 0.85rem;
+      font-size: 0.8rem;
+      color: var(--text-mid);
+      font-weight: 600;
+    }
+
+    /* ========== CUSTOM QUOTE ========== */
     .custom-section { background: var(--cream); }
 
     .custom-inner {
@@ -356,50 +700,47 @@
       align-items: center;
     }
 
-    .custom-visual {
+    .custom-card {
       background: var(--ivory);
       border: 1.5px solid var(--beige);
       border-radius: var(--radius-lg);
-      padding: 2rem;
-      box-shadow: 0 6px 28px rgba(74,55,40,0.07);
+      padding: 1.8rem;
+      box-shadow: 0 4px 24px rgba(74,55,40,0.07);
     }
 
-    .custom-visual h4 {
+    .custom-card h4 {
       font-family: 'Playfair Display', serif;
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: var(--brown-dark);
-      margin-bottom: 1.2rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.7rem;
+      border-bottom: 1px solid var(--beige);
     }
 
     .custom-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.7rem 0;
-      border-bottom: 1px solid var(--beige);
-      font-size: 0.88rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--beige-light);
+      font-size: 0.85rem;
     }
 
-    .custom-row:last-child { border-bottom: none; }
-
+    .custom-row:last-of-type { border-bottom: none; }
     .custom-row-label { color: var(--text-mid); }
-
-    .custom-row-value {
-      font-weight: 700;
-      color: var(--sage-dark);
-    }
+    .custom-row-value { font-weight: 700; color: var(--sage-dark); }
 
     .custom-total {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: baseline;
       margin-top: 1rem;
-      padding-top: 1rem;
+      padding-top: 0.9rem;
       border-top: 2px solid var(--beige);
     }
 
     .custom-total-label {
-      font-size: 0.82rem;
+      font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -408,35 +749,19 @@
 
     .custom-total-value {
       font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       color: var(--brown-dark);
     }
 
     .custom-total-note {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       color: var(--text-muted);
       font-style: italic;
       text-align: right;
-      margin-top: 0.3rem;
+      margin-top: 0.25rem;
     }
 
-    .btn-primary {
-      background: var(--sage-dark);
-      color: var(--ivory);
-      padding: 0.9rem 2rem;
-      border-radius: var(--radius-pill);
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 700;
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 1.5rem;
-      transition: background 0.22s, transform 0.15s;
-    }
-
-    .btn-primary:hover { background: var(--brown); transform: translateY(-2px); }
-
-    /* ---- TRAVEL POLICY ---- */
+    /* ========== TRAVEL / WHERE WE GO ========== */
     .travel-section { background: var(--beige-pale); }
 
     .travel-inner {
@@ -446,185 +771,150 @@
       align-items: start;
     }
 
-    .travel-map {
+    /* Zone card */
+    .zones-card {
       background: var(--ivory);
       border: 1.5px solid var(--beige);
       border-radius: var(--radius-lg);
       overflow: hidden;
-      box-shadow: 0 6px 28px rgba(74,55,40,0.07);
+      box-shadow: 0 4px 20px rgba(74,55,40,0.07);
     }
 
-    .travel-map-header {
+    .zones-header {
       background: var(--brown-dark);
-      padding: 1rem 1.5rem;
+      padding: 0.9rem 1.4rem;
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.55rem;
     }
 
-    .travel-map-header span {
-      font-size: 1rem;
+    .zones-header span { font-size: 1rem; }
+
+    .zones-header p {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: rgba(255,253,246,0.75);
+      letter-spacing: 0.04em;
     }
 
-    .travel-map-header p {
-      font-size: 0.82rem;
-      color: rgba(255,253,246,0.7);
-      font-weight: 600;
-    }
+    .zone-list { padding: 0.5rem 1.4rem 1rem; }
 
-    .travel-zones {
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .travel-zone {
+    .zone-item {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--beige);
+      gap: 0.9rem;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--beige-light);
     }
 
-    .travel-zone:last-child { border-bottom: none; }
+    .zone-item:last-child { border-bottom: none; }
 
     .zone-dot {
-      width: 14px; height: 14px;
+      width: 12px; height: 12px;
       border-radius: 50%;
       flex-shrink: 0;
     }
 
     .zone-dot.free    { background: var(--sage); }
     .zone-dot.paid    { background: var(--brown-light); }
-    .zone-dot.special { background: #c0392b; }
+    .zone-dot.special { background: #b85c3a; }
+
+    .zone-info { flex: 1; }
 
     .zone-label {
-      flex: 1;
       font-size: 0.88rem;
-      color: var(--text-mid);
-      font-weight: 600;
+      font-weight: 700;
+      color: var(--brown-dark);
     }
 
-    .zone-distance {
-      font-size: 0.78rem;
+    .zone-range {
+      font-size: 0.76rem;
       color: var(--text-muted);
-      display: block;
-      font-weight: 400;
+      margin-top: 1px;
     }
 
     .zone-rate {
       font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: var(--brown-dark);
       text-align: right;
+      flex-shrink: 0;
     }
 
     .zone-rate small {
       display: block;
       font-family: 'Nunito', sans-serif;
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       color: var(--text-muted);
       font-style: italic;
     }
 
-    .travel-info { display: flex; flex-direction: column; gap: 1rem; }
+    /* Areas grid */
+    .travel-right { display: flex; flex-direction: column; gap: 1rem; }
 
-    .travel-info-card {
+    .areas-card {
       background: var(--ivory);
       border: 1px solid var(--beige);
-      border-radius: var(--radius-md);
-      padding: 1.2rem 1.4rem;
+      border-radius: var(--radius-lg);
+      padding: 1.3rem 1.5rem;
     }
 
-    .travel-info-card h4 {
+    .areas-card h4 {
       font-weight: 700;
       color: var(--brown-dark);
       font-size: 0.9rem;
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.8rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
 
+    .areas-grid-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .area-pill {
+      background: var(--sage-pale);
+      color: var(--sage-dark);
+      border: 1px solid var(--sage-light);
+      border-radius: var(--radius-pill);
+      padding: 0.28rem 0.75rem;
+      font-size: 0.76rem;
+      font-weight: 600;
+    }
+
+    .travel-info-cards { display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .travel-info-card {
+      background: var(--ivory);
+      border: 1px solid var(--beige);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.3rem;
+    }
+
+    .travel-info-card h4 {
+      font-weight: 700;
+      color: var(--brown-dark);
+      font-size: 0.88rem;
+      margin-bottom: 0.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
     .travel-info-card p {
-      font-size: 0.83rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
       line-height: 1.6;
     }
 
-    /* ---- PACKAGES QUICK-LINK ---- */
-    .quick-packages {
-      background: var(--ivory);
-      border-top: 1px solid var(--beige);
-      padding: 3rem 2rem;
-      text-align: center;
-    }
-
-    .quick-packages p {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-    }
-
-    .quick-packages a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--sage-dark);
-      text-decoration: none;
-      border: 2px solid var(--sage-light);
-      padding: 0.7rem 1.5rem;
-      border-radius: var(--radius-pill);
-      transition: background 0.2s, border-color 0.2s;
-    }
-
-    .quick-packages a:hover { background: var(--sage-pale); border-color: var(--sage); }
-
-    /* ---- CTA STRIP ---- */
-    .cta-strip {
-      background: var(--brown-dark);
-      padding: 4rem 2rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta-strip::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 30% 50%, rgba(122,158,126,0.1) 0%, transparent 55%);
-      pointer-events: none;
-    }
-
-    .cta-strip > * { position: relative; z-index: 2; }
-
-    .cta-strip h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+    /* ========== BUTTONS ========== */
+    .btn-primary {
+      background: var(--sage-dark);
       color: var(--ivory);
-      margin-bottom: 0.8rem;
-    }
-
-    .cta-strip h2 em { color: var(--sage-light); font-style: italic; }
-
-    .cta-strip p {
-      font-size: 0.95rem;
-      color: rgba(255,253,246,0.6);
-      margin-bottom: 2rem;
-      max-width: 480px;
-      margin-left: auto; margin-right: auto;
-    }
-
-    .cta-strip-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-
-    .btn-cta-primary {
-      background: var(--sage);
-      color: var(--ivory);
-      padding: 0.9rem 2rem;
+      padding: 0.88rem 2rem;
       border-radius: var(--radius-pill);
       font-family: 'Nunito', sans-serif;
       font-size: 0.95rem;
@@ -634,12 +924,12 @@
       transition: background 0.22s, transform 0.15s;
     }
 
-    .btn-cta-primary:hover { background: var(--sage-dark); transform: translateY(-2px); }
+    .btn-primary:hover { background: var(--brown); transform: translateY(-2px); }
 
-    .btn-cta-ghost {
+    .btn-ghost {
       background: transparent;
       color: var(--ivory);
-      padding: 0.9rem 2rem;
+      padding: 0.88rem 2rem;
       border-radius: var(--radius-pill);
       border: 1.5px solid rgba(255,253,246,0.3);
       font-family: 'Nunito', sans-serif;
@@ -650,9 +940,47 @@
       transition: background 0.22s, border-color 0.22s, transform 0.15s;
     }
 
-    .btn-cta-ghost:hover { background: rgba(255,253,246,0.08); border-color: rgba(255,253,246,0.55); transform: translateY(-2px); }
+    .btn-ghost:hover { background: rgba(255,253,246,0.08); border-color: rgba(255,253,246,0.5); transform: translateY(-2px); }
 
-    /* ---- FOOTER ---- */
+    /* ========== CTA STRIP ========== */
+    .cta-strip {
+      background: var(--brown-dark);
+      padding: 4rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-strip::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(122,158,126,0.1) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .cta-strip > * { position: relative; z-index: 2; }
+
+    .cta-strip h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 2.8vw, 2.3rem);
+      color: var(--ivory);
+      margin-bottom: 0.75rem;
+    }
+
+    .cta-strip h2 em { color: var(--sage-light); font-style: italic; }
+
+    .cta-strip p {
+      font-size: 0.93rem;
+      color: rgba(255,253,246,0.58);
+      margin-bottom: 2rem;
+      max-width: 460px;
+      margin-left: auto; margin-right: auto;
+      line-height: 1.7;
+    }
+
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ========== FOOTER ========== */
     footer {
       background: var(--brown-dark);
       border-top: 1px solid rgba(255,253,246,0.08);
@@ -660,24 +988,34 @@
       text-align: center;
     }
 
-    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--ivory); font-style: italic; margin-bottom: 0.4rem; }
-    .footer-tagline { font-size: 0.8rem; color: rgba(255,253,246,0.4); margin-bottom: 1.3rem; }
-    .footer-links { display: flex; gap: 1.8rem; justify-content: center; list-style: none; margin-bottom: 1.5rem; flex-wrap: wrap; }
-    .footer-links a { font-size: 0.8rem; color: rgba(255,253,246,0.45); text-decoration: none; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--sage-light); }
-    .footer-copy { font-size: 0.74rem; color: rgba(255,253,246,0.22); }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--ivory); font-style: italic; margin-bottom: 0.4rem; }
+    .footer-tagline { font-size: 0.78rem; color: rgba(255,253,246,0.38); margin-bottom: 1.2rem; }
 
-    /* ---- ANIMATE ---- */
+    .footer-links {
+      display: flex;
+      gap: 1.6rem;
+      justify-content: center;
+      list-style: none;
+      margin-bottom: 1.3rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a { font-size: 0.78rem; color: rgba(255,253,246,0.42); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--sage-light); }
+    .footer-copy { font-size: 0.72rem; color: rgba(255,253,246,0.2); }
+
+    /* ========== ANIMATE ========== */
     [data-animate] {
       opacity: 0;
-      transform: translateY(22px);
+      transform: translateY(20px);
       transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
     [data-animate].is-visible { opacity: 1; transform: translateY(0); }
 
-    /* ---- RESPONSIVE ---- */
-    @media (max-width: 860px) {
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 900px) {
+      .pkg-grid     { grid-template-columns: 1fr 1fr; }
       .rates-grid   { grid-template-columns: 1fr; }
       .custom-inner { grid-template-columns: 1fr; gap: 2.5rem; }
       .travel-inner { grid-template-columns: 1fr; }
@@ -686,8 +1024,10 @@
     }
 
     @media (max-width: 600px) {
-      section { padding: 4rem 1.25rem; }
-      .page-hero { padding: 6rem 1.25rem 4rem; }
+      .pkg-grid { grid-template-columns: 1fr; }
+      section   { padding: 3.5rem 1.25rem; }
+      .page-hero { padding: 6rem 1.25rem 3.5rem; }
+      .page-tabs { overflow-x: auto; justify-content: flex-start; }
     }
   </style>
 </head>
@@ -695,13 +1035,29 @@
 
   <!-- ========== NAVBAR ========== -->
   <nav id="navbar">
-    <a href="index.html" class="nav-logo">Ninang's <span>Childcare</span></a>
+    <a href="index.html" class="nav-logo-wrap">
+      <!-- Replace src with your actual logo path e.g. src="logo.png" -->
+      <img
+        src="logo.png"
+        alt="Ninang's On-The-Go Tots logo"
+        class="nav-logo-img"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+      />
+      <!-- Fallback text logo shown if image not found -->
+      <div class="nav-logo-img placeholder" style="display:none;">🌿</div>
+      <div class="nav-logo-text">
+        Ninang's On-The-Go Tots
+        <span>On-The-Go Childcare</span>
+      </div>
+    </a>
+
     <button class="nav-hamburger" id="hamburgerBtn" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
+
     <ul class="nav-links">
+      <li><a href="about.html">About Us</a></li>
       <li><a href="index.html#offer">Services</a></li>
-      <li><a href="index.html#why">About</a></li>
       <li><a href="packages.html">Packages</a></li>
       <li><a href="pricing.html" class="active">Pricing</a></li>
       <li><a href="reviews.html">Reviews</a></li>
@@ -712,12 +1068,12 @@
   <div class="nav-drawer" id="navDrawer">
     <button class="drawer-close" id="drawerClose">&times;</button>
     <ul>
-      <li><a href="index.html#offer"  class="drawer-link">Services</a></li>
-      <li><a href="index.html#why"    class="drawer-link">About</a></li>
-      <li><a href="packages.html"     class="drawer-link">Packages</a></li>
-      <li><a href="pricing.html"      class="drawer-link">Pricing</a></li>
-      <li><a href="reviews.html"      class="drawer-link">Reviews</a></li>
-      <li><a href="booking.html"      class="drawer-link drawer-cta">Book Now</a></li>
+      <li><a href="about.html"       class="drawer-link">About Us</a></li>
+      <li><a href="index.html#offer" class="drawer-link">Services</a></li>
+      <li><a href="packages.html"    class="drawer-link">Packages</a></li>
+      <li><a href="pricing.html"     class="drawer-link">Pricing</a></li>
+      <li><a href="reviews.html"     class="drawer-link">Reviews</a></li>
+      <li><a href="booking.html"     class="drawer-link drawer-cta">Book Now</a></li>
     </ul>
   </div>
   <div class="nav-overlay" id="navOverlay"></div>
@@ -725,90 +1081,182 @@
 
   <!-- ========== PAGE HERO ========== -->
   <header class="page-hero">
-    <div class="page-eyebrow">Pricing</div>
-    <h1>Simple &amp; <em>Transparent</em> Pricing</h1>
-    <p>We believe parents should always know exactly what to expect. No hidden fees, no surprises — just honest, clear pricing discussed openly with you.</p>
+    <div class="page-eyebrow">Packages &amp; Pricing</div>
+    <h1>Simple, <em>Transparent</em> Pricing</h1>
+    <p>No hidden fees. No surprises. Every price is discussed openly with you — because parents deserve to know exactly what to expect.</p>
   </header>
 
+  <!-- Sticky tab nav -->
+  <div class="page-tabs" id="pageTabs">
+    <a href="#packages-rates" class="page-tab active" data-tab="packages-rates">Packages &amp; Rates</a>
+    <a href="#custom"         class="page-tab"         data-tab="custom">Custom Quote</a>
+    <a href="#travel"         class="page-tab"         data-tab="travel">Where We Go</a>
+  </div>
 
-  <!-- ========== HOURLY RATES ========== -->
-  <section class="rates-section" id="rates">
+
+  <!-- ========== PACKAGES + RATES ========== -->
+  <section class="packages-rates-section" id="packages-rates">
     <div class="container">
-      <div class="section-eyebrow">Hourly Childcare Rates</div>
-      <h2 class="section-title">Pay only for<br>the care you <em>need</em></h2>
-      <p class="section-lead">Our hourly rates are designed for flexibility. Mix and match caregivers based on your event size and duration.</p>
+
+      <!-- Packages -->
+      <div class="section-eyebrow">Our Packages</div>
+      <h2 class="section-title">Choose your<br><em>care package</em></h2>
+      <p class="section-lead">Three packages rooted in Filipino values of warmth and family. Each includes caregivers, activities, and setup — tailored to your event size.</p>
+
+      <div class="pkg-grid">
+
+        <!-- TAHANAN -->
+        <div class="pkg-card" data-animate>
+          <div class="pkg-tag">🏡 Tahanan</div>
+          <div class="pkg-meaning">"Home" — intimate &amp; comforting</div>
+          <div class="pkg-name">Small Event</div>
+          <ul class="pkg-features">
+            <li>Up to 8 children</li>
+            <li>Up to 3 hours of care</li>
+            <li>2 professional caregivers</li>
+            <li>Play mats, toys &amp; guided activities</li>
+          </ul>
+          <div class="pkg-price-block">
+            <div class="pkg-starting-label">Starting at</div>
+            <div class="pkg-price"><span class="rate-currency">CAD</span> $350 <sub>/ event</sub></div>
+          </div>
+          <a href="booking.html" class="btn-pkg btn-pkg-outline">Book This Package</a>
+        </div>
+
+        <!-- ALAGA (featured) -->
+        <div class="pkg-card featured" data-animate>
+          <div class="pkg-tag">🌿 Alaga</div>
+          <div class="pkg-meaning">"To care for" — thoughtful &amp; attentive</div>
+          <div class="pkg-name">Medium Event</div>
+          <ul class="pkg-features">
+            <li>10–15 children</li>
+            <li>3–4 hours of care</li>
+            <li>2–3 professional caregivers</li>
+            <li>Craft &amp; sensory activities</li>
+            <li>Calm, structured play environment</li>
+          </ul>
+          <div class="pkg-price-block">
+            <div class="pkg-starting-label">Starting at</div>
+            <div class="pkg-price"><span class="rate-currency">CAD</span> $600 <sub>/ event</sub></div>
+          </div>
+          <a href="booking.html" class="btn-pkg btn-pkg-primary">Book This Package</a>
+        </div>
+
+        <!-- PAMILYA -->
+        <div class="pkg-card" data-animate>
+          <div class="pkg-tag">👨‍👩‍👧‍👦 Pamilya</div>
+          <div class="pkg-meaning">"Family" — full-service for big moments</div>
+          <div class="pkg-name">Large Event / Wedding</div>
+          <ul class="pkg-features">
+            <li>20–30 children</li>
+            <li>4–5 hours of care</li>
+            <li>Full caregiver team on-site</li>
+            <li>Multiple play stations</li>
+            <li>Optional themed décor</li>
+          </ul>
+          <div class="pkg-price-block">
+            <div class="pkg-starting-label">Starting at</div>
+            <div class="pkg-price"><span class="rate-currency">CAD</span> $1,000 <sub>/ event</sub></div>
+          </div>
+          <a href="booking.html" class="btn-pkg btn-pkg-outline">Book This Package</a>
+        </div>
+
+      </div>
+
+
+      <!-- ── Hourly Rates ── -->
+      <div class="rates-divider">
+        <div class="rates-divider-label">Mix &amp; Match — Hourly Rates</div>
+      </div>
+
+      <p class="section-lead" style="margin-bottom:1.5rem;">Need something in between? Mix and match caregivers and hours to fit your event exactly — no package required.</p>
 
       <div class="rates-grid">
         <div class="rate-card" data-animate>
-          <span class="rate-card-icon">👤</span>
+          <span class="rate-icon">👤</span>
           <h3>1 Caregiver</h3>
-          <div class="rate-big">$40</div>
-          <div class="rate-per">per hour</div>
+          <div class="rate-big"><span class="rate-currency">$</span>50</div>
+          <div class="rate-per">CAD / hour</div>
         </div>
         <div class="rate-card" data-animate>
-          <span class="rate-card-icon">👥</span>
+          <span class="rate-icon">👥</span>
           <h3>2 Caregivers</h3>
-          <div class="rate-big">$70</div>
-          <div class="rate-per">per hour</div>
+          <div class="rate-big"><span class="rate-currency">$</span>90</div>
+          <div class="rate-per">CAD / hour</div>
         </div>
         <div class="rate-card" data-animate>
-          <span class="rate-card-icon">➕</span>
-          <h3>Each Additional Caregiver</h3>
-          <div class="rate-big">$30</div>
-          <div class="rate-per">per hour, per person</div>
+          <span class="rate-icon">➕</span>
+          <h3>Each Additional</h3>
+          <div class="rate-big"><span class="rate-currency">$</span>40</div>
+          <div class="rate-per">CAD / hour per caregiver</div>
         </div>
       </div>
 
-      <div class="pricing-notice" data-animate>
-        <span class="pricing-notice-icon">🔔</span>
-        <p>
-          <strong>Please note:</strong> These are base hourly rates. Final pricing for your event is always confirmed during your free consultation call — it may vary based on the number of children, event type, duration, add-ons, and travel distance. We will never surprise you with unexpected charges.
-        </p>
+      <div class="mix-match-note" style="margin-top:1.2rem;" data-animate>
+        <span class="mix-match-note-icon">💡</span>
+        <p><strong>Mix &amp; match freely.</strong> Need 3 caregivers for 4 hours? That's 2 caregivers ($90/hr) + 1 additional ($40/hr) × 4 hrs = <strong>CAD $520</strong>. We'll walk you through the numbers on your consultation call — no surprises.</p>
       </div>
+
+      <div class="pricing-disclaimer" data-animate>
+        All rates are starting prices in Canadian dollars. Final pricing is confirmed during your free consultation call and may vary based on event type, number of children, duration, add-ons, and travel distance.
+      </div>
+
+      <!-- Add-ons -->
+      <div class="addons-strip" data-animate>
+        <h4>✨ Available Add-Ons <span style="font-family:'Nunito',sans-serif; font-size:0.75rem; font-weight:600; color:var(--text-muted); font-style:italic;">(pricing discussed on consultation call)</span></h4>
+        <div class="addons-list">
+          <div class="addon-pill">🎨 Sensory Play Stations</div>
+          <div class="addon-pill">✂️ Craft Activity Upgrades</div>
+          <div class="addon-pill">🎬 Movie / Quiet Corner</div>
+          <div class="addon-pill">👶 Additional Caregivers</div>
+          <div class="addon-pill">🎉 Themed Décor</div>
+        </div>
+      </div>
+
     </div>
   </section>
 
 
-  <!-- ========== BUILD YOUR OWN ========== -->
+  <!-- ========== CUSTOM QUOTE ========== -->
   <section class="custom-section" id="custom">
     <div class="container">
       <div class="custom-inner">
 
         <div data-animate>
-          <div class="section-eyebrow">Build-Your-Own Care Option</div>
+          <div class="section-eyebrow">Build-Your-Own</div>
           <h2 class="section-title">Every family is<br><em>different</em></h2>
-          <p class="section-lead">
-            If our packages don't quite fit, we're happy to create a custom childcare plan just for you. Tell us your event details and we'll build a quote that works for your family — no pressure, no commitment.
+          <p class="section-lead" style="margin-bottom:1.1rem;">
+            If none of our packages fit just right, we'll build a custom plan around your event — your guest count, your duration, your needs.
           </p>
-          <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.7; margin-bottom:1.2rem;">
-            Whether you need a single caregiver for two hours or a full team for an entire day, we'll put together exactly what you need. Our consultation call is the perfect place to talk through your options.
+          <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.75; margin-bottom:1.5rem;">
+            Tell us your event details and we'll put together a transparent, itemised quote — no pressure, no commitment until you're ready.
           </p>
-          <a href="booking.html" class="btn-primary">Tell Us Your Event Details →</a>
+          <a href="booking.html" class="btn-primary">Tell Us About Your Event →</a>
         </div>
 
-        <div class="custom-visual" data-animate>
-          <h4>Example Custom Quote</h4>
+        <div class="custom-card" data-animate>
+          <h4>📋 Example Custom Quote</h4>
           <div class="custom-row">
             <span class="custom-row-label">2 Caregivers × 4 hrs</span>
-            <span class="custom-row-value">$280</span>
+            <span class="custom-row-value">CAD $360</span>
           </div>
           <div class="custom-row">
             <span class="custom-row-label">1 Additional Caregiver × 4 hrs</span>
-            <span class="custom-row-value">$120</span>
+            <span class="custom-row-value">CAD $160</span>
           </div>
           <div class="custom-row">
-            <span class="custom-row-label">Sensory Play Station Add-On</span>
-            <span class="custom-row-value">TBD</span>
+            <span class="custom-row-label">Sensory Play Add-On</span>
+            <span class="custom-row-value">TBD on call</span>
           </div>
           <div class="custom-row">
             <span class="custom-row-label">Travel (35 km from base)</span>
-            <span class="custom-row-value">$10.50</span>
+            <span class="custom-row-value">CAD $10.50</span>
           </div>
           <div class="custom-total">
             <span class="custom-total-label">Estimated Total</span>
-            <span class="custom-total-value">~$410+</span>
+            <span class="custom-total-value">~CAD $530+</span>
           </div>
-          <p class="custom-total-note">Final price confirmed on consultation call</p>
+          <p class="custom-total-note">Exact total confirmed on your free consultation call</p>
         </div>
 
       </div>
@@ -816,122 +1264,150 @@
   </section>
 
 
-  <!-- ========== TRAVEL POLICY ========== -->
+  <!-- ========== WHERE WE GO ========== -->
   <section class="travel-section" id="travel">
     <div class="container">
-      <div class="section-eyebrow">Travel Policy</div>
-      <h2 class="section-title">We come <em>to you</em> —<br>across the GTA</h2>
+      <div class="section-eyebrow">Where We Go</div>
+      <h2 class="section-title">We come <em>to you</em> —<br>across Ontario</h2>
       <p class="section-lead" style="margin-bottom:2.5rem;">
-        We proudly serve families across the Greater Toronto Area. Here's exactly how our travel fees work — no surprises.
+        Based in the GTA, we travel to families and events across the Greater Toronto Area and beyond. Here's how travel fees work — always transparent, always discussed before you commit.
       </p>
 
       <div class="travel-inner">
 
-        <div class="travel-map" data-animate>
-          <div class="travel-map-header">
-            <span>📍</span>
-            <p>GTA Travel Zones</p>
+        <!-- Travel zones -->
+        <div data-animate>
+          <div class="zones-card">
+            <div class="zones-header">
+              <span>📍</span>
+              <p>Travel Zones (from our base)</p>
+            </div>
+            <div class="zone-list">
+              <div class="zone-item">
+                <div class="zone-dot free"></div>
+                <div class="zone-info">
+                  <div class="zone-label">Free Zone</div>
+                  <div class="zone-range">First 20 km</div>
+                </div>
+                <div class="zone-rate">
+                  Free
+                  <small>No travel charge</small>
+                </div>
+              </div>
+              <div class="zone-item">
+                <div class="zone-dot paid"></div>
+                <div class="zone-info">
+                  <div class="zone-label">Standard Travel</div>
+                  <div class="zone-range">20 km – 60 km</div>
+                </div>
+                <div class="zone-rate">
+                  $0.70/km
+                  <small>CAD, after first 20 km</small>
+                </div>
+              </div>
+              <div class="zone-item">
+                <div class="zone-dot special"></div>
+                <div class="zone-info">
+                  <div class="zone-label">Extended Travel</div>
+                  <div class="zone-range">Over 60 km</div>
+                </div>
+                <div class="zone-rate">
+                  $0.70/km +
+                  <small>Setup fee may apply</small>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="travel-zones">
-            <div class="travel-zone">
-              <div class="zone-dot free"></div>
-              <div>
-                <div class="zone-label">Free Zone</div>
-                <span class="zone-distance">First 20 km from our base</span>
-              </div>
-              <div class="zone-rate">
-                Free
-                <small>No charge</small>
-              </div>
-            </div>
-            <div class="travel-zone">
-              <div class="zone-dot paid"></div>
-              <div>
-                <div class="zone-label">Standard Travel</div>
-                <span class="zone-distance">20 km – 60 km</span>
-              </div>
-              <div class="zone-rate">
-                $0.70/km
-                <small>Per km after 20 km</small>
-              </div>
-            </div>
-            <div class="travel-zone">
-              <div class="zone-dot special"></div>
-              <div>
-                <div class="zone-label">Extended Travel</div>
-                <span class="zone-distance">Over 60 km</span>
-              </div>
-              <div class="zone-rate">
-                $0.70/km +
-                <small>Setup fee may apply</small>
-              </div>
+
+          <div style="margin-top:1.2rem;">
+            <div class="travel-info-card">
+              <h4>💡 No surprises, ever</h4>
+              <p>We confirm travel costs before finalising any booking. Every quote includes an itemised travel line so you always know exactly what you're paying.</p>
             </div>
           </div>
         </div>
 
-        <div class="travel-info" data-animate>
-          <div class="travel-info-card">
-            <h4>📏 How we calculate distance</h4>
-            <p>Distance is measured from our base location to your event venue using the most direct route. We'll confirm the exact travel charge during your consultation call before any booking is finalized.</p>
-          </div>
-          <div class="travel-info-card">
-            <h4>🏙️ Areas we serve</h4>
-            <p>We proudly serve Toronto, Mississauga, Brampton, Vaughan, Markham, Scarborough, Etobicoke, North York, Pickering, and surrounding GTA communities.</p>
-          </div>
-          <div class="travel-info-card">
-            <h4>⚠️ Events over 60 km</h4>
-            <p>For events more than 60 km away, an additional setup fee may be required. This will be discussed transparently during your consultation — we'll always give you the full picture before you commit.</p>
-          </div>
-          <div class="travel-info-card">
-            <h4>💡 No travel surprises</h4>
-            <p>We never charge travel fees without telling you first. Every quote we send includes an itemized travel cost so you always know exactly what you're paying for.</p>
-          </div>
-        </div>
+        <!-- Areas we serve -->
+        <div class="travel-right" data-animate>
 
+          <div class="areas-card">
+            <h4>🏙️ Areas We Serve</h4>
+            <div class="areas-grid-pills">
+              <span class="area-pill">Toronto</span>
+              <span class="area-pill">Mississauga</span>
+              <span class="area-pill">Brampton</span>
+              <span class="area-pill">Vaughan</span>
+              <span class="area-pill">Markham</span>
+              <span class="area-pill">Richmond Hill</span>
+              <span class="area-pill">Scarborough</span>
+              <span class="area-pill">Etobicoke</span>
+              <span class="area-pill">North York</span>
+              <span class="area-pill">Pickering</span>
+              <span class="area-pill">Ajax</span>
+              <span class="area-pill">Whitby</span>
+              <span class="area-pill">Oshawa</span>
+              <span class="area-pill">Burlington</span>
+              <span class="area-pill">Oakville</span>
+              <span class="area-pill">Milton</span>
+              <span class="area-pill">Newmarket</span>
+              <span class="area-pill">Aurora</span>
+              <span class="area-pill">Barrie</span>
+              <span class="area-pill">Hamilton</span>
+              <span class="area-pill">+ surrounding areas</span>
+            </div>
+          </div>
+
+          <div class="travel-info-cards">
+            <div class="travel-info-card">
+              <h4>📏 How distance is calculated</h4>
+              <p>Distance is measured from our base to your event venue by the most direct route. Confirmed on your consultation call before anything is finalised.</p>
+            </div>
+            <div class="travel-info-card">
+              <h4>⚠️ Events over 60 km</h4>
+              <p>Events beyond 60 km may carry an additional setup fee. We'll always walk you through the full cost before you commit — no obligation.</p>
+            </div>
+            <div class="travel-info-card">
+              <h4>🚗 Outside the GTA?</h4>
+              <p>We're open to travelling further for the right event. Reach out and we'll let you know if we can make it work — we love a new adventure.</p>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </section>
 
 
-  <!-- ========== PACKAGES QUICK-LINK ========== -->
-  <div class="quick-packages">
-    <p>Want to see our pre-built packages with included features and starting prices?</p>
-    <a href="packages.html">
-      View Our Packages
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-    </a>
-  </div>
-
-
   <!-- ========== CTA STRIP ========== -->
   <section class="cta-strip">
-    <h2>Ready to get a<br><em>custom quote?</em></h2>
-    <p>Book a free consultation call and we'll walk you through everything — pricing, caregivers, activities, and travel — tailored to your event.</p>
-    <div class="cta-strip-btns">
-      <a href="booking.html" class="btn-cta-primary">Book a Free Consultation</a>
-      <a href="packages.html" class="btn-cta-ghost">Browse Packages</a>
+    <h2>Ready to get your<br><em>custom quote?</em></h2>
+    <p>Book a free consultation call and we'll walk you through everything — packages, rates, add-ons, and travel — all tailored to your event.</p>
+    <div class="cta-btns">
+      <a href="booking.html" class="btn-primary">Book a Free Consultation</a>
+      <a href="packages.html" class="btn-ghost">Browse Packages</a>
     </div>
   </section>
 
 
   <!-- ========== FOOTER ========== -->
   <footer>
-    <div class="footer-logo">Ninang's Childcare</div>
+    <div class="footer-logo">Ninang's On-The-Go Tots</div>
     <p class="footer-tagline">Caring like family — wherever you go.</p>
     <ul class="footer-links">
+      <li><a href="about.html">About Us</a></li>
       <li><a href="index.html#offer">Services</a></li>
-      <li><a href="index.html#why">About</a></li>
       <li><a href="packages.html">Packages</a></li>
       <li><a href="pricing.html">Pricing</a></li>
       <li><a href="reviews.html">Reviews</a></li>
       <li><a href="booking.html">Book Now</a></li>
+      <li><a href="mailto:hello@ninangsonthetgotots.com">Contact</a></li>
     </ul>
-    <p class="footer-copy">© 2025 Ninang's Childcare. All rights reserved.</p>
+    <p class="footer-copy">© 2025 Ninang's On-The-Go Tots. All rights reserved.</p>
   </footer>
 
 
   <script>
-    /* ---- Navbar ---- */
+    /* ---- Navbar scroll ---- */
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 10);
@@ -943,27 +1419,50 @@
     const drawerClose  = document.getElementById('drawerClose');
     const navOverlay   = document.getElementById('navOverlay');
 
-    function openDrawer()  { navDrawer.classList.add('open'); navOverlay.classList.add('show'); document.body.style.overflow = 'hidden'; }
-    function closeDrawer() { navDrawer.classList.remove('open'); navOverlay.classList.remove('show'); document.body.style.overflow = ''; }
+    const openDrawer  = () => { navDrawer.classList.add('open'); navOverlay.classList.add('show'); document.body.style.overflow = 'hidden'; };
+    const closeDrawer = () => { navDrawer.classList.remove('open'); navOverlay.classList.remove('show'); document.body.style.overflow = ''; };
 
     hamburgerBtn.addEventListener('click', openDrawer);
     drawerClose.addEventListener('click', closeDrawer);
     navOverlay.addEventListener('click', closeDrawer);
     document.querySelectorAll('.drawer-link').forEach(l => l.addEventListener('click', closeDrawer));
 
+    /* ---- Sticky tab highlight on scroll ---- */
+    const tabLinks = document.querySelectorAll('.page-tab');
+    const sections = ['packages-rates', 'custom', 'travel'].map(id => document.getElementById(id));
+    const navH     = 68 + 44;
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(sec => {
+        if (window.scrollY >= sec.offsetTop - navH - 20) current = sec.id;
+      });
+      tabLinks.forEach(link => {
+        link.classList.toggle('active', link.dataset.tab === current);
+      });
+    }, { passive: true });
+
+    tabLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.getElementById(this.dataset.tab);
+        if (!target) return;
+        window.scrollTo({ top: target.offsetTop - navH, behavior: 'smooth' });
+      });
+    });
+
     /* ---- Scroll animations ---- */
     const animEls = document.querySelectorAll('[data-animate]');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
           const siblings = [...entry.target.parentElement.querySelectorAll('[data-animate]')];
-          const idx = siblings.indexOf(entry.target);
-          entry.target.style.transitionDelay = (idx * 90) + 'ms';
+          entry.target.style.transitionDelay = (siblings.indexOf(entry.target) * 85) + 'ms';
           entry.target.classList.add('is-visible');
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1 });
 
     animEls.forEach(el => observer.observe(el));
   </script>

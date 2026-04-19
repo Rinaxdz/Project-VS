@@ -220,3 +220,145 @@
     });
   });
 })();
+
+
+/* ------------------------------------------
+   7. REVIEW FORM — star picker + Formspree
+   ------------------------------------------
+   HOW TO CONNECT TO FORMSPREE + GOOGLE SHEETS:
+   -----------------------------------------------
+   STEP 1 — Log in to formspree.io
+   STEP 2 — Create a SECOND form project (e.g. "Ninang's Reviews")
+   STEP 3 — Copy your unique endpoint (e.g. https://formspree.io/f/xyzabcde)
+   STEP 4 — Replace the REVIEW_ENDPOINT value below with YOUR endpoint
+   STEP 5 — In Formspree dashboard → Integrations → connect a second
+             Google Sheet tab (e.g. "Reviews") — all submissions land there
+             for you to read and approve before adding to reviews.html
+   ------------------------------------------ */
+
+(function initReviewForm() {
+  const reviewForm    = document.getElementById('reviewForm');
+  if (!reviewForm) return;   // not on homepage, skip
+
+  const REVIEW_ENDPOINT = 'https://formspree.io/f/YOUR_REVIEWS_FORM_ID';
+  //                                              ^^^^^^^^^^^^^^^^^^^^
+  //                    Replace with your Formspree reviews form endpoint
+
+  /* --- Star picker --- */
+  const starBtns  = document.querySelectorAll('.star-btn');
+  const ratingInput = document.getElementById('rRating');
+  let   selectedRating = 0;
+
+  starBtns.forEach((btn) => {
+    // Hover: highlight up to hovered star
+    btn.addEventListener('mouseenter', () => {
+      const val = parseInt(btn.dataset.value);
+      starBtns.forEach((b) => {
+        b.classList.toggle('hovered', parseInt(b.dataset.value) <= val);
+      });
+    });
+
+    // Mouse leave: revert to selected state
+    btn.addEventListener('mouseleave', () => {
+      starBtns.forEach((b) => {
+        b.classList.remove('hovered');
+        b.classList.toggle('selected', parseInt(b.dataset.value) <= selectedRating);
+      });
+    });
+
+    // Click: lock selection
+    btn.addEventListener('click', () => {
+      selectedRating = parseInt(btn.dataset.value);
+      ratingInput.value = selectedRating;
+      starBtns.forEach((b) => {
+        b.classList.toggle('selected', parseInt(b.dataset.value) <= selectedRating);
+      });
+      // Clear rating error if present
+      showReviewError('rRating', 'rRatingError', false);
+    });
+  });
+
+  /* --- Helpers --- */
+  function showReviewError(fieldId, errorId, show) {
+    const field = document.getElementById(fieldId);
+    const error = document.getElementById(errorId);
+    if (!field || !error) return;
+    if (show) {
+      field.classList.add('error');
+      error.classList.add('show');
+    } else {
+      field.classList.remove('error');
+      error.classList.remove('show');
+    }
+  }
+
+  // Clear errors on input
+  ['rName', 'rReview'].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', () => showReviewError(id, id + 'Error', false));
+  });
+
+  const rEvent = document.getElementById('rEvent');
+  if (rEvent) rEvent.addEventListener('change', () => showReviewError('rEvent', 'rEventError', false));
+
+  /* --- Submit --- */
+  reviewForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const name    = document.getElementById('rName').value.trim();
+    const event   = document.getElementById('rEvent').value;
+    const rating  = ratingInput.value;
+    const review  = document.getElementById('rReview').value.trim();
+    let   isValid = true;
+
+    if (!name)   { showReviewError('rName',   'rNameError',   true); isValid = false; }
+    if (!event)  { showReviewError('rEvent',  'rEventError',  true); isValid = false; }
+    if (!rating) { showReviewError('rRating', 'rRatingError', true); isValid = false; }
+    if (!review) { showReviewError('rReview', 'rReviewError', true); isValid = false; }
+
+    if (!isValid) return;
+
+    // Loading state
+    const submitBtn  = document.getElementById('reviewSubmitBtn');
+    const submitText = document.getElementById('reviewSubmitText');
+    const spinner    = document.getElementById('reviewSpinner');
+    submitBtn.disabled     = true;
+    submitText.textContent = 'Submitting…';
+    spinner.style.display  = 'block';
+
+    const payload = {
+      'Name'         : name,
+      'Event Type'   : event,
+      'Rating'       : rating + ' / 5 stars',
+      'Review'       : review,
+      'Submitted At' : new Date().toLocaleString('en-CA', {
+                         timeZone  : 'America/Toronto',
+                         dateStyle : 'medium',
+                         timeStyle : 'short'
+                       })
+    };
+
+    try {
+      const response = await fetch(REVIEW_ENDPOINT, {
+        method  : 'POST',
+        headers : { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body    : JSON.stringify(payload)
+      });
+
+      if (response.ok) {
+        document.getElementById('reviewFormWrap').style.display  = 'none';
+        document.getElementById('reviewThankYou').style.display  = 'block';
+      } else {
+        submitBtn.disabled     = false;
+        submitText.textContent = 'Submit My Review';
+        spinner.style.display  = 'none';
+        alert('Something went wrong. Please try again shortly.');
+      }
+    } catch {
+      submitBtn.disabled     = false;
+      submitText.textContent = 'Submit My Review';
+      spinner.style.display  = 'none';
+      alert('Network error — please check your connection and try again.');
+    }
+  });
+})();
