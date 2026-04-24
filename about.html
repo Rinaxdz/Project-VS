@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Us — Ninang's On-The-Go Tots</title>
+  <title>About Us — Ninang's Childcare</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;500;600;700&display=swap"
     rel="stylesheet"
@@ -61,51 +61,6 @@
     }
 
     nav.scrolled { box-shadow: 0 4px 24px rgba(74,55,40,0.08); }
-
-    /* ---- Logo wrap ---- */
-    .nav-logo-wrap {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      text-decoration: none;
-    }
-
-    .nav-logo-img {
-      height: 38px;
-      width: 38px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--beige);
-      background: var(--sage-pale);
-      display: block;
-      flex-shrink: 0;
-    }
-
-    .nav-logo-img.placeholder {
-      display: none;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-    }
-
-    .nav-logo-text {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      color: var(--brown-dark);
-      font-style: italic;
-      line-height: 1.2;
-    }
-
-    .nav-logo-text span {
-      display: block;
-      font-size: 0.6rem;
-      font-style: normal;
-      font-family: 'Nunito', sans-serif;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--sage-dark);
-    }
 
     .nav-logo {
       font-family: 'Playfair Display', serif;
@@ -818,25 +773,13 @@
 
   <!-- ========== NAVBAR ========== -->
   <nav id="navbar">
-    <a href="index.html" class="nav-logo-wrap">
-      <img
-        src="logo.png"
-        alt="Ninang's On-The-Go Tots logo"
-        class="nav-logo-img"
-        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-      />
-      <div class="nav-logo-img placeholder" style="display:none;">🌿</div>
-      <div class="nav-logo-text">
-        Ninang's On-The-Go Tots
-        <span>On-The-Go Childcare</span>
-      </div>
-    </a>
+    <a href="index.html" class="nav-logo">Ninang's <span>Childcare</span></a>
     <button class="nav-hamburger" id="hamburgerBtn" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links">
-      <li><a href="about.html" class="active">About Us</a></li>
       <li><a href="index.html#offer">Services</a></li>
+      <li><a href="about.html" class="active">About Us</a></li>
       <li><a href="packages.html">Packages</a></li>
       <li><a href="pricing.html">Pricing</a></li>
       <li><a href="reviews.html">Reviews</a></li>
@@ -847,8 +790,8 @@
   <div class="nav-drawer" id="navDrawer">
     <button class="drawer-close" id="drawerClose">&times;</button>
     <ul>
-      <li><a href="about.html"        class="drawer-link">About Us</a></li>
       <li><a href="index.html#offer"  class="drawer-link">Services</a></li>
+      <li><a href="about.html"        class="drawer-link">About Us</a></li>
       <li><a href="packages.html"     class="drawer-link">Packages</a></li>
       <li><a href="pricing.html"      class="drawer-link">Pricing</a></li>
       <li><a href="reviews.html"      class="drawer-link">Reviews</a></li>
@@ -889,7 +832,7 @@
         <div data-animate>
           <div class="story-body">
             <p>
-              Ninang's On-The-Go Tots was created with one simple goal: to care for children the way family would. The word <em>ninang</em> means godmother in Filipino — someone loving, trusted, and always there when needed. That same spirit guides everything we do.
+              Ninang's Childcare was created with one simple goal: to care for children the way family would. The word <em>ninang</em> means godmother in Filipino — someone loving, trusted, and always there when needed. That same spirit guides everything we do.
             </p>
 
             <blockquote class="story-quote">
@@ -897,7 +840,7 @@
             </blockquote>
 
             <p>
-              Ninang's On-The-Go Tots was founded by a Filipino woman who migrated to Canada and carried that tradition with her. In Filipino culture, godparents don't just show up for baptisms — they are woven into the fabric of raising a child. They are called on at celebrations, at milestones, at the moments that matter most.
+              Ninang's Childcare was founded by a Filipino woman who migrated to Canada and carried that tradition with her. In Filipino culture, godparents don't just show up for baptisms — they are woven into the fabric of raising a child. They are called on at celebrations, at milestones, at the moments that matter most.
             </p>
             <p>
               That's exactly what we bring to your events. Not just childcare — but the warmth, the attentiveness, and the love of a ninang. We believe raising children takes a village, and we're honoured to be part of yours.
@@ -1184,18 +1127,18 @@
 
   <!-- ========== FOOTER ========== -->
   <footer>
-    <div class="footer-logo">Ninang's On-The-Go Tots</div>
+    <div class="footer-logo">Ninang's Childcare</div>
     <p class="footer-tagline">Caring like family — wherever you go.</p>
     <ul class="footer-links">
-      <li><a href="about.html">About Us</a></li>
       <li><a href="index.html#offer">Services</a></li>
+      <li><a href="about.html">About Us</a></li>
       <li><a href="packages.html">Packages</a></li>
       <li><a href="pricing.html">Pricing</a></li>
       <li><a href="reviews.html">Reviews</a></li>
       <li><a href="booking.html">Book Now</a></li>
       <li><a href="mailto:hello@ninangschildcare.com">Contact</a></li>
     </ul>
-    <p class="footer-copy">© 2025 Ninang's On-The-Go Tots. All rights reserved.</p>
+    <p class="footer-copy">© 2025 Ninang's Childcare. All rights reserved.</p>
   </footer>
 
 
