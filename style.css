@@ -1125,3 +1125,285 @@ footer {
   color: rgba(255, 253, 246, 0.6);
   line-height: 1.55;
 }
+
+
+/* ===========================================
+   LEAVE A REVIEW SECTION (homepage)
+   =========================================== */
+.review-form-section {
+  background: var(--beige-pale);
+  border-top: 1px solid var(--beige);
+  border-bottom: 1px solid var(--beige);
+}
+
+.review-form-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.review-form-left {
+  position: sticky;
+  top: 90px;
+}
+
+.review-see-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--sage-dark);
+  text-decoration: none;
+  margin-top: 1.5rem;
+  letter-spacing: 0.03em;
+  transition: gap 0.2s;
+}
+
+.review-see-all:hover { gap: 0.7rem; }
+
+/* Form card */
+.review-form-right {
+  background: var(--ivory);
+  border: 1px solid var(--beige);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+}
+
+/* Select field */
+#rEvent {
+  width: 100%;
+  background: var(--beige-pale);
+  border: 1.5px solid var(--beige);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.92rem;
+  color: var(--text-dark);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238C7A66' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  cursor: pointer;
+}
+
+#rEvent:focus {
+  border-color: var(--sage);
+  box-shadow: 0 0 0 3px rgba(122, 158, 126, 0.15);
+  background-color: var(--ivory);
+}
+
+#rEvent.error { border-color: #c0392b; }
+
+/* Star picker */
+.star-picker {
+  display: flex;
+  gap: 0.3rem;
+  margin-top: 0.2rem;
+}
+
+.star-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--beige);
+  cursor: pointer;
+  padding: 0 0.1rem;
+  line-height: 1;
+  transition: color 0.15s, transform 0.1s;
+}
+
+.star-btn:hover,
+.star-btn.hovered,
+.star-btn.selected {
+  color: var(--brown-light);
+}
+
+.star-btn:active { transform: scale(0.9); }
+
+/* Review submit button — full width */
+.review-submit-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Thank you state */
+.review-thankyou {
+  text-align: center;
+  padding: 2rem 1rem;
+  animation: fadeInUp 0.45s ease both;
+}
+
+.review-ty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.review-thankyou h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--brown-dark);
+  margin-bottom: 0.6rem;
+}
+
+.review-thankyou p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 860px) {
+  .review-form-inner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .review-form-left { position: static; }
+}
+
+
+/* ===========================================
+   REVIEW FORM — homepage shared field styles
+   =========================================== */
+
+/* Spin animation (shared with booking form spinner) */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Generic form-group used inside review form on homepage */
+.review-form-right .form-group {
+  margin-bottom: 1.1rem;
+}
+
+.review-form-right .form-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-mid);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.review-form-right .form-group input,
+.review-form-right .form-group textarea,
+.review-form-right .form-group select {
+  width: 100%;
+  background: var(--ivory);
+  border: 1.5px solid var(--beige);
+  border-radius: var(--radius-md);
+  padding: 0.78rem 1rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* Dropdown arrow for select */
+.review-form-right .form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238C7A66' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+.review-form-right .form-group input::placeholder,
+.review-form-right .form-group textarea::placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.review-form-right .form-group input:focus,
+.review-form-right .form-group textarea:focus,
+.review-form-right .form-group select:focus {
+  border-color: var(--sage);
+  box-shadow: 0 0 0 3px rgba(122, 158, 126, 0.15);
+  background: var(--ivory);
+}
+
+.review-form-right .form-group input.error,
+.review-form-right .form-group textarea.error,
+.review-form-right .form-group select.error {
+  border-color: #c0392b;
+  box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.1);
+}
+
+/* Hidden rating input error target */
+#rRating.error + .field-error { display: block; }
+
+/* Field error messages */
+.field-error {
+  font-size: 0.76rem;
+  color: #c0392b;
+  margin-top: 0.3rem;
+  display: none;
+}
+
+.field-error.show {
+  display: block;
+}
+
+/* Submit button width inside review form */
+.review-submit-btn {
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.25rem;
+}
+
+/* ---- Logo wrap (all pages) ---- */
+.nav-logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+
+.nav-logo-img {
+  height: 44px;
+  width: 44px;
+  border-radius: 0;
+  object-fit: contain;
+  border: none;
+  background: transparent;
+  display: block;
+  flex-shrink: 0;
+}
+
+.nav-logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: var(--brown-dark);
+  font-style: italic;
+  line-height: 1.2;
+}
+
+.nav-logo-text span {
+  display: block;
+  font-size: 0.6rem;
+  font-style: normal;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sage-dark);
+}

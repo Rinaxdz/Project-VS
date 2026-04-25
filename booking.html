@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Book a Consultation — Ninang's Childcare</title>
+  <title>Book a Consultation — Ninang's On-The-Go Tots</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;500;600;700&display=swap"
     rel="stylesheet"
@@ -49,27 +49,59 @@
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 100;
+      z-index: 200;
       height: 68px;
       background: rgba(255, 253, 246, 0.95);
       backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--beige);
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 2.5rem;
+      transition: box-shadow 0.3s;
     }
 
-    .nav-logo {
+    /* ---- Logo wrap ---- */
+    .nav-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-img {
+      height: 44px;
+      width: 44px;
+      border-radius: 0;
+      object-fit: contain;
+      border: none;
+      background: transparent;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-text {
       font-family: 'Playfair Display', serif;
-      font-size: 1.35rem;
+      font-size: 1rem;
       color: var(--brown-dark);
       font-style: italic;
-      text-decoration: none;
+      line-height: 1.2;
     }
 
-    .nav-logo span { color: var(--sage-dark); font-style: normal; }
+    .nav-logo-text span {
+      display: block;
+      font-size: 0.6rem;
+      font-style: normal;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sage-dark);
+    }
 
+    /* ---- Back link ---- */
     .nav-back {
       display: flex;
       align-items: center;
@@ -80,6 +112,7 @@
       text-decoration: none;
       letter-spacing: 0.04em;
       transition: color 0.2s;
+      flex-shrink: 0;
     }
 
     .nav-back:hover { color: var(--sage-dark); }
@@ -299,7 +332,8 @@
     }
 
     .form-group input,
-    .form-group textarea {
+    .form-group textarea,
+    .form-group select {
       width: 100%;
       background: var(--beige-pale);
       border: 1.5px solid var(--beige);
@@ -314,20 +348,23 @@
     }
 
     .form-group input::placeholder,
-    .form-group textarea::placeholder {
+    .form-group textarea::placeholder,
+    .form-group select::placeholder {
       color: var(--text-muted);
       font-style: italic;
     }
 
     .form-group input:focus,
-    .form-group textarea:focus {
+    .form-group textarea:focus,
+    .form-group select:focus {
       border-color: var(--sage);
       box-shadow: 0 0 0 3px rgba(122, 158, 126, 0.15);
       background: var(--ivory);
     }
 
     .form-group input.error,
-    .form-group textarea.error {
+    .form-group textarea.error,
+    .form-group select.error {
       border-color: #c0392b;
       box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.1);
     }
@@ -340,6 +377,32 @@
     }
 
     .field-error.show { display: block; }
+
+    /* Select-specific overrides */
+    .form-group select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238C7A66' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-color: var(--beige-pale);
+      padding-right: 2.8rem;
+      cursor: pointer;
+    }
+
+    .form-group select:focus {
+      background-color: var(--ivory);
+    }
+
+    /* Field hint text below a field */
+    .field-hint {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+      line-height: 1.5;
+      font-style: italic;
+    }
+
 
     .form-group textarea {
       min-height: 110px;
@@ -554,7 +617,17 @@
 
   <!-- NAV -->
   <nav>
-    <a href="index.html" class="nav-logo">Ninang's <span>Childcare</span></a>
+    <a href="index.html" class="nav-logo-wrap">
+      <img
+        src="images/ninangs2.png"
+        alt="Ninang's On-The-Go Tots logo"
+        class="nav-logo-img"
+      />
+      <div class="nav-logo-text">
+        Ninang's On-The-Go Tots
+        <span>On-The-Go Childcare</span>
+      </div>
+    </a>
     <a href="index.html" class="nav-back">
       <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
       Back to Home
@@ -618,6 +691,19 @@
 
         <form id="bookingForm" novalidate>
 
+          <!-- Package Selection -->
+          <div class="form-group">
+            <label for="selectedPackage">Interested Package <span class="optional">&nbsp;— optional</span></label>
+            <select id="selectedPackage" name="Package Interest">
+              <option value="" selected>Not sure yet — we'll discuss on the call</option>
+              <option value="Tahanan Package (Small Event — up to 8 children, 3 hrs, from CAD $350)">🏡 Tahanan Package — Small Event (up to 8 children, from CAD $350)</option>
+              <option value="Alaga Package (Medium Event — 10–15 children, 3–4 hrs, from CAD $600)">🌿 Alaga Package — Medium Event (10–15 children, from CAD $600)</option>
+              <option value="Pamilya Package (Large Event / Wedding — 20–30 children, 4–5 hrs, from CAD $1,000)">👨‍👩‍👧‍👦 Pamilya Package — Large Event / Wedding (20–30 children, from CAD $1,000)</option>
+              <option value="Hourly / Custom Plan">⏱ Hourly / Custom Plan — Mix &amp; Match</option>
+            </select>
+            <span class="field-hint">Selecting a package helps us prepare for your call — no commitment yet.</span>
+          </div>
+
           <!-- Full Name -->
           <div class="form-group">
             <label for="fullName">Full Name <span style="color:#c0392b">*</span></label>
@@ -679,8 +765,8 @@
           </button>
 
           <p class="form-note">
-            By submitting, you agree to be contacted by Ninang's Childcare regarding your inquiry.
-            Questions? Email us at <a href="/cdn-cgi/l/email-protection#1b737e7777745b7572757a757c68787372777f787a697e35787476"><span class="__cf_email__" data-cfemail="1f777a7373705f7176717e71786c7c7776737b7c7e6d7a317c7072">[email&#160;protected]</span></a>
+            By submitting, you agree to be contacted by Ninang's On-The-Go Tots regarding your inquiry.
+            Questions? Email us at <a href="mailto:ninangsonthegotots@gmail.com" style="color:var(--sage-light);">ninangsonthegotots@gmail.com</a>
           </p>
 
         </form>
@@ -714,7 +800,13 @@
 
   <!-- FOOTER -->
   <footer class="booking-footer">
-    <p>© 2025 Ninang's Childcare. All rights reserved. &nbsp;|&nbsp; Caring like family — wherever you go.</p>
+    <div style="display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem;">
+      <a href="index.html" style="font-size:0.78rem;color:rgba(255,253,246,0.45);text-decoration:none;">Home</a>
+      <a href="packages.html" style="font-size:0.78rem;color:rgba(255,253,246,0.45);text-decoration:none;">Packages</a>
+      <a href="pricing.html" style="font-size:0.78rem;color:rgba(255,253,246,0.45);text-decoration:none;">Pricing</a>
+      <a href="reviews.html" style="font-size:0.78rem;color:rgba(255,253,246,0.45);text-decoration:none;">Reviews</a>
+    </div>
+    <p>© 2025 Ninang's On-The-Go Tots. All rights reserved. &nbsp;|&nbsp; Caring like family — wherever you go.</p>
   </footer>
 
 
@@ -736,7 +828,7 @@
                  automatically land as a new row in your sheet!
        ============================================================ */
 
-    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xaqawgaw';
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
     //                                                   ^^^^^^^^^^^
     //                          Replace this with your actual Formspree form ID
 
@@ -812,8 +904,11 @@
       spinner.style.display     = 'block';
 
       /* Build payload — Formspree reads these field names as column headers in Google Sheets */
+      const pkg     = document.getElementById('selectedPackage').value;
+
       const payload = {
-        'Full Name'     : name,
+        'Package Interest' : pkg || 'Not specified',
+        'Full Name'        : name,
         'Phone Number'  : phone,
         'Email'         : email   || 'Not provided',
         'Inquiry'       : inquiry || 'Not provided',

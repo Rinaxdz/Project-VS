@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Reviews — Ninang's Childcare</title>
+  <title>Reviews — Ninang's On-The-Go Tots</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;500;600;700&display=swap"
     rel="stylesheet"
@@ -59,6 +59,44 @@
     }
 
     nav.scrolled { box-shadow: 0 4px 24px rgba(74,55,40,0.08); }
+
+    /* ---- Logo wrap ---- */
+    .nav-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+
+    .nav-logo-img {
+      height: 44px;
+      width: 44px;
+      border-radius: 0;
+      object-fit: contain;
+      border: none;
+      background: transparent;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--brown-dark);
+      font-style: italic;
+      line-height: 1.2;
+    }
+
+    .nav-logo-text span {
+      display: block;
+      font-size: 0.6rem;
+      font-style: normal;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sage-dark);
+    }
 
     .nav-logo {
       font-family: 'Playfair Display', serif;
@@ -511,10 +549,20 @@
 
   <!-- ========== NAV ========== -->
   <nav id="navbar">
-    <a href="index.html" class="nav-logo">Ninang's <span>Childcare</span></a>
+    <a href="index.html" class="nav-logo-wrap">
+      <img
+        src="images/ninangs2.png"
+        alt="Ninang's On-The-Go Tots logo"
+        class="nav-logo-img"
+      />
+      <div class="nav-logo-text">
+        Ninang's On-The-Go Tots
+        <span>On-The-Go Childcare</span>
+      </div>
+    </a>
     <ul class="nav-links">
+      <li><a href="about.html">About Us</a></li>
       <li><a href="index.html#offer">Services</a></li>
-      <li><a href="index.html#why">About</a></li>
       <li><a href="packages.html">Packages</a></li>
       <li><a href="pricing.html">Pricing</a></li>
       <li><a href="reviews.html" class="active">Reviews</a></li>
@@ -581,99 +629,93 @@
 
   <!-- ========== FOOTER ========== -->
   <footer>
-    <div class="footer-logo">Ninang's Childcare</div>
+    <div class="footer-logo">Ninang's On-The-Go Tots</div>
     <p class="footer-tagline">Caring like family — wherever you go.</p>
     <ul class="footer-links">
       <li><a href="index.html#offer">Services</a></li>
-      <li><a href="index.html#why">About Us</a></li>
+      <li><a href="about.html">About Us</a></li>
       <li><a href="reviews.html">Reviews</a></li>
       <li><a href="booking.html">Book Now</a></li>
-      <li><a href="/cdn-cgi/l/email-protection#dcb4b9b0b0b39cb2b5b2bdb2bbafbfb4b5b0b8bfbdaeb9f2bfb3b1">Contact</a></li>
+      <li><a href="mailto:ninangsonthegotots@gmail.com" style="color:var(--sage-light);">ninangsonthegotots@gmail.com</a></li>
     </ul>
-    <p class="footer-copy">© 2025 Ninang's Childcare. All rights reserved.</p>
+    <p class="footer-copy">© 2025 Ninang's On-The-Go Tots. All rights reserved.</p>
   </footer>
 
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     /* ============================================================
-       NINANG'S CHILDCARE — reviews.html
+       NINANG'S ON-THE-GO TOTS — reviews.html
+       Live reviews powered by JSONBin.io (free, no backend)
 
-       HOW TO ADD APPROVED REVIEWS:
-       ---------------------------------------------------------------
-       1. A customer submits the review form on the homepage.
-       2. The submission lands in your Formspree dashboard AND
-          your connected Google Sheet.
-       3. You read it, approve it, then copy the details into the
-          APPROVED_REVIEWS array below, following the same format.
-       4. Save the file and re-upload — the review goes live!
+       ONE-TIME SETUP (~2 minutes):
+       1. Go to https://jsonbin.io → create a FREE account
+       2. Click "New Bin" → paste:  { "reviews": [] }  → Save
+       3. Copy the Bin ID from the URL bar
+       4. Go to Account → API Keys → copy your Master Key
+       5. Paste both values below — done!
 
-       FIELDS per review object:
-         name       — customer's name
-         initials   — 2 letters shown in the avatar circle
-         event      — must match one of the filter-btn data-filter values
-         rating     — number 1–5
-         date       — display date string (e.g. "June 2025")
-         text       — the review text
-       ============================================================ */
+       TO ADD AN APPROVED REVIEW:
+       Open this page in Chrome, open DevTools Console (F12), and run:
+         addApprovedReview({
+           name: 'Maria S.', event: 'Wedding / Reception',
+           rating: 5, text: 'Amazing service!'
+         });
+       The review instantly appears for all visitors worldwide.
+    ============================================================ */
 
-    const APPROVED_REVIEWS = [
-      {
-        name     : 'Ana & Carlo',
-        initials : 'AC',
-        event    : 'Wedding / Reception',
-        rating   : 5,
-        date     : 'March 2025',
-        text     : "Ninang's team was an absolute blessing at our wedding. The kids were so happy and entertained — we didn't worry once. Our little nephew even cried when they had to leave!"
-      },
-      {
-        name     : 'Marites R.',
-        initials : 'MR',
-        event    : 'Debut / Milestone Party',
-        rating   : 5,
-        date     : 'January 2025',
-        text     : "Booked them for my daughter's debut and they handled all the younger siblings perfectly. They set up a whole little play area — parents were so impressed. Will book again!"
-      },
-      {
-        name     : 'Jerome S.',
-        initials : 'JS',
-        event    : 'Corporate / Work Event',
-        rating   : 5,
-        date     : 'February 2025',
-        text     : "Our company family day needed reliable child supervision and Ninang's delivered. Professional, warm, and the children loved them. Highly recommended for corporate events!"
-      }
-      /*
-        ---- PASTE NEW APPROVED REVIEWS BELOW THIS LINE ----
-        Follow this format exactly (don't forget the comma after each }):
+    const JSONBIN_BIN_ID  = 'YOUR_BIN_ID_HERE';
+    const JSONBIN_API_KEY = 'YOUR_API_KEY_HERE';
+    const JSONBIN_URL     = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
+    const isConfigured    = JSONBIN_BIN_ID !== 'YOUR_BIN_ID_HERE';
 
-        ,{
-          name     : 'First Last',
-          initials : 'FL',
-          event    : 'Birthday Party',
-          rating   : 5,
-          date     : 'April 2025',
-          text     : 'Their review text goes here.'
-        }
-      */
+    /* ── Seed reviews shown before JSONBin is configured ── */
+    const SEED_REVIEWS = [
+      { name: 'Ana & Carlo',  initials: 'AC', event: 'Wedding / Reception',   rating: 5, date: 'March 2025',    text: "Ninang's team was an absolute blessing at our wedding. The kids were so happy and entertained — we didn't worry once. Our little nephew even cried when they had to leave!" },
+      { name: 'Marites R.',   initials: 'MR', event: 'Debut / Milestone Party', rating: 5, date: 'January 2025', text: "Booked them for my daughter's debut and they handled all the younger siblings perfectly. They set up a whole little play area — parents were so impressed. Will book again!" },
+      { name: 'Jerome S.',    initials: 'JS', event: 'Corporate / Work Event',  rating: 5, date: 'February 2025', text: "Our company family day needed reliable child supervision and Ninang's delivered. Professional, warm, and the children loved them. Highly recommended for corporate events!" }
     ];
 
+    let ALL_REVIEWS   = [];
+    let currentFilter = 'All';
 
-    /* ---- Helpers ---- */
-    function starsHTML(rating) {
-      return '★'.repeat(rating) + '☆'.repeat(5 - rating);
-    }
+    /* ── Helpers ── */
+    const starsHTML = r => '★'.repeat(r) + '☆'.repeat(5 - r);
 
     function getInitials(name) {
-      const parts = name.trim().split(/\s+/);
-      if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
-      return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+      const p = name.trim().split(/\s+/);
+      return p.length === 1 ? p[0].slice(0, 2).toUpperCase() : (p[0][0] + p[p.length-1][0]).toUpperCase();
     }
 
-    function buildCard(review, delay) {
-      const card = document.createElement('div');
-      card.className  = 'review-card';
-      card.dataset.event = review.event;
-      card.style.animationDelay = delay + 'ms';
+    function fmtDate(iso) {
+      try { return new Date(iso).toLocaleDateString('en-CA', { month: 'long', year: 'numeric' }); }
+      catch { return iso || ''; }
+    }
 
+    /* ── Fetch from JSONBin ── */
+    async function fetchReviews() {
+      if (!isConfigured) {
+        ALL_REVIEWS = SEED_REVIEWS;
+      } else {
+        try {
+          const res  = await fetch(JSONBIN_URL + '/latest', { headers: { 'X-Master-Key': JSONBIN_API_KEY } });
+          const data = await res.json();
+          ALL_REVIEWS = (data.record && Array.isArray(data.record.reviews)) ? data.record.reviews : SEED_REVIEWS;
+        } catch {
+          ALL_REVIEWS = SEED_REVIEWS;
+        }
+      }
+      renderReviews(currentFilter);
+      updateStats();
+    }
+
+    /* ── Build card ── */
+    function buildCard(review, i) {
+      const card = document.createElement('div');
+      card.className = 'review-card';
+      card.dataset.event = review.event;
+      card.style.animationDelay = (i * 80) + 'ms';
+      const initials = review.initials || getInitials(review.name);
+      const date     = review.date || fmtDate(review.submittedAt);
       card.innerHTML = `
         <div class="review-card-top">
           <div class="review-stars">${starsHTML(review.rating)}</div>
@@ -682,59 +724,78 @@
         <div class="review-quote">"</div>
         <p class="review-text">${review.text}</p>
         <div class="review-author">
-          <div class="review-avatar">${review.initials || getInitials(review.name)}</div>
+          <div class="review-avatar">${initials}</div>
           <div>
             <div class="review-author-name">${review.name}</div>
-            <div class="review-author-date">${review.date}</div>
+            <div class="review-author-date">${date}</div>
           </div>
-        </div>
-      `;
+        </div>`;
       return card;
     }
 
-    /* ---- Render ---- */
+    /* ── Render ── */
     function renderReviews(filter) {
       const grid = document.getElementById('reviewsGrid');
       grid.innerHTML = '';
-
-      const filtered = filter === 'All'
-        ? APPROVED_REVIEWS
-        : APPROVED_REVIEWS.filter(r => r.event === filter);
-
-      if (filtered.length === 0) {
-        grid.innerHTML = `
-          <div class="no-reviews">
-            <div style="font-size:2rem;margin-bottom:.5rem;">🌿</div>
-            <p>No reviews yet for this event type.<br>Be the first to share your experience!</p>
-          </div>`;
+      const list = filter === 'All' ? ALL_REVIEWS : ALL_REVIEWS.filter(r => r.event === filter);
+      if (!list.length) {
+        grid.innerHTML = `<div class="no-reviews"><div style="font-size:2rem;margin-bottom:.5rem;">🌿</div><p>No reviews yet for this event type.<br>Be the first to share your experience!</p></div>`;
         return;
       }
-
-      filtered.forEach((review, i) => {
-        grid.appendChild(buildCard(review, i * 80));
-      });
+      const sorted = [...list].sort((a, b) => new Date(b.submittedAt || 0) - new Date(a.submittedAt || 0));
+      sorted.forEach((r, i) => grid.appendChild(buildCard(r, i)));
     }
 
-    /* ---- Summary stats ---- */
+    /* ── Stats ── */
     function updateStats() {
-      const total = APPROVED_REVIEWS.length;
-      const avg   = total
-        ? (APPROVED_REVIEWS.reduce((s, r) => s + r.rating, 0) / total).toFixed(1)
-        : '—';
+      const total = ALL_REVIEWS.length;
+      const avg   = total ? (ALL_REVIEWS.reduce((s, r) => s + Number(r.rating), 0) / total).toFixed(1) : '—';
       document.getElementById('totalReviews').textContent = total;
       document.getElementById('avgRating').textContent    = avg;
     }
 
-    /* ---- Filter buttons ---- */
+    /* ── Filter ── */
     document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        renderReviews(btn.dataset.filter);
+        currentFilter = btn.dataset.filter;
+        renderReviews(currentFilter);
       });
     });
 
-    /* ---- Navbar scroll shadow ---- */
+    /* ── Navbar ── */
     const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scr
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 10), { passive: true });
+
+    /* ── Add approved review via console ── */
+    window.addApprovedReview = async function(data) {
+      if (!isConfigured) { console.warn('Set JSONBIN_BIN_ID and JSONBIN_API_KEY first.'); return; }
+      const getRes  = await fetch(JSONBIN_URL + '/latest', { headers: { 'X-Master-Key': JSONBIN_API_KEY } });
+      const getData = await getRes.json();
+      const reviews = (getData.record && getData.record.reviews) ? getData.record.reviews : [];
+      reviews.unshift({
+        name        : data.name,
+        initials    : data.initials || getInitials(data.name),
+        event       : data.event,
+        rating      : Number(data.rating),
+        text        : data.text,
+        date        : data.date || new Date().toLocaleDateString('en-CA', { month: 'long', year: 'numeric' }),
+        submittedAt : new Date().toISOString()
+      });
+      const putRes = await fetch(JSONBIN_URL, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_API_KEY },
+        body: JSON.stringify({ reviews })
+      });
+      if (putRes.ok) { console.log('✅ Review added! Refreshing...'); await fetchReviews(); }
+      else console.error('❌ Failed:', await putRes.text());
+    };
+
+    /* ── Init ── */
+    fetchReviews();
+
+  </script>
+
+</body>
+</html>
