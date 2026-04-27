@@ -1,5 +1,5 @@
 /* ===========================================
-   NINANG'S CHILDCARE — main.js
+   NINANG'S ON-THE-GO TOTS — main.js
    =========================================== */
 
 
@@ -10,213 +10,286 @@
   const navbar = document.getElementById('navbar');
   if (!navbar) return;
 
-  // Add shadow when user scrolls down
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 20) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
   }, { passive: true });
 
-  // Highlight the active section link in the navbar
   const sections   = document.querySelectorAll('section[id]');
   const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
 
   function setActiveLink() {
     let currentId = '';
-
-    sections.forEach((section) => {
-      const sectionTop = section.offsetTop - 100;
-      if (window.scrollY >= sectionTop) {
-        currentId = section.getAttribute('id');
-      }
+    sections.forEach((s) => {
+      if (window.scrollY >= s.offsetTop - 100) currentId = s.getAttribute('id');
     });
-
-    navAnchors.forEach((anchor) => {
-      anchor.classList.remove('active');
-      if (anchor.getAttribute('href') === `#${currentId}`) {
-        anchor.classList.add('active');
-      }
+    navAnchors.forEach((a) => {
+      a.classList.toggle('active', a.getAttribute('href') === `#${currentId}`);
     });
   }
 
   window.addEventListener('scroll', setActiveLink, { passive: true });
-  setActiveLink(); // run once on load
+  setActiveLink();
 })();
 
 
 /* ------------------------------------------
-   2. MOBILE DRAWER — open / close
+   2. MOBILE DRAWER
    ------------------------------------------ */
 (function initMobileDrawer() {
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const navDrawer    = document.getElementById('navDrawer');
   const drawerClose  = document.getElementById('drawerClose');
   const navOverlay   = document.getElementById('navOverlay');
-
   if (!hamburgerBtn || !navDrawer) return;
 
-  function openDrawer() {
-    navDrawer.classList.add('open');
-    navOverlay.classList.add('show');
-    document.body.style.overflow = 'hidden'; // prevent background scroll
-  }
+  const open  = () => { navDrawer.classList.add('open'); navOverlay.classList.add('show'); document.body.style.overflow = 'hidden'; };
+  const close = () => { navDrawer.classList.remove('open'); navOverlay.classList.remove('show'); document.body.style.overflow = ''; };
 
-  function closeDrawer() {
-    navDrawer.classList.remove('open');
-    navOverlay.classList.remove('show');
-    document.body.style.overflow = '';
-  }
-
-  hamburgerBtn.addEventListener('click', openDrawer);
-  drawerClose.addEventListener('click', closeDrawer);
-  navOverlay.addEventListener('click', closeDrawer);
-
-  // Close drawer when a link inside it is clicked
-  document.querySelectorAll('.drawer-link').forEach((link) => {
-    link.addEventListener('click', closeDrawer);
-  });
+  hamburgerBtn.addEventListener('click', open);
+  drawerClose.addEventListener('click', close);
+  navOverlay.addEventListener('click', close);
+  document.querySelectorAll('.drawer-link').forEach(l => l.addEventListener('click', close));
 })();
 
 
 /* ------------------------------------------
-   3. SCROLL ANIMATIONS — fade + slide up
-      Elements with [data-animate] fade in
-      when they enter the viewport.
+   3. SCROLL ANIMATIONS
    ------------------------------------------ */
 (function initScrollAnimations() {
-  const animatedEls = document.querySelectorAll('[data-animate]');
-  if (!animatedEls.length) return;
+  const els = document.querySelectorAll('[data-animate]');
+  if (!els.length) return;
 
-  // Stagger siblings inside the same grid/list
-  function applyStagger(el, index) {
-    el.style.transitionDelay = `${index * 80}ms`;
-  }
-
-  // Group children of the same parent so we can stagger them
   const groups = new Map();
-  animatedEls.forEach((el) => {
-    const parent = el.parentElement;
-    if (!groups.has(parent)) groups.set(parent, []);
-    groups.get(parent).push(el);
+  els.forEach((el) => {
+    const p = el.parentElement;
+    if (!groups.has(p)) groups.set(p, []);
+    groups.get(p).push(el);
   });
-
   groups.forEach((children) => {
-    children.forEach((child, i) => applyStagger(child, i));
+    children.forEach((child, i) => { child.style.transitionDelay = `${i * 80}ms`; });
   });
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target); // animate once only
-        }
-      });
-    },
-    { threshold: 0.15 }
-  );
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
 
-  animatedEls.forEach((el) => observer.observe(el));
+  els.forEach((el) => obs.observe(el));
 })();
 
 
 /* ------------------------------------------
-   4. COUNTER ANIMATION — animate numbers
-      Elements with [data-count="NUMBER"]
-      count up from 0 when scrolled into view.
+   4. COUNTER ANIMATION
    ------------------------------------------ */
 (function initCounters() {
   const counters = document.querySelectorAll('[data-count]');
   if (!counters.length) return;
 
   function animateCounter(el) {
-    const target   = parseInt(el.getAttribute('data-count'), 10);
-    const duration = 1800; // ms
-    const startTime = performance.now();
-
+    const target = parseInt(el.getAttribute('data-count'), 10);
+    const start  = performance.now();
     function update(now) {
-      const elapsed  = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      // Ease-out cubic
-      const eased    = 1 - Math.pow(1 - progress, 3);
-      const value    = Math.floor(eased * target);
-
-      el.textContent = value + '+';
-
-      if (progress < 1) {
-        requestAnimationFrame(update);
-      } else {
-        el.textContent = target + '+';
-      }
+      const p = Math.min((now - start) / 1800, 1);
+      el.textContent = Math.floor((1 - Math.pow(1 - p, 3)) * target) + '+';
+      if (p < 1) requestAnimationFrame(update);
+      else el.textContent = target + '+';
     }
-
     requestAnimationFrame(update);
   }
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animateCounter(entry.target);
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.5 }
-  );
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) { animateCounter(e.target); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.5 });
 
-  counters.forEach((el) => observer.observe(el));
+  counters.forEach((el) => obs.observe(el));
 })();
 
 
 /* ------------------------------------------
-   5. SMOOTH SCROLL — override for all
-      internal anchor links (fallback for
-      older browsers that ignore CSS).
+   5. SMOOTH SCROLL
    ------------------------------------------ */
 (function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener('click', function (e) {
-      const targetId = this.getAttribute('href').slice(1);
-      const target   = document.getElementById(targetId);
+      const target = document.getElementById(this.getAttribute('href').slice(1));
       if (!target) return;
-
       e.preventDefault();
-
-      const navbarHeight = document.getElementById('navbar')?.offsetHeight ?? 68;
-      const targetTop    = target.getBoundingClientRect().top + window.scrollY - navbarHeight;
-
-      window.scrollTo({ top: targetTop, behavior: 'smooth' });
+      const navH = document.getElementById('navbar')?.offsetHeight ?? 68;
+      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - navH, behavior: 'smooth' });
     });
   });
 })();
 
 
 /* ------------------------------------------
-   6. OFFER CARD TILT — subtle 3D tilt
-      on mouse-move for desktop users.
+   6. CARD TILT (desktop only)
    ------------------------------------------ */
 (function initCardTilt() {
-  // Skip on touch/mobile
   if (window.matchMedia('(hover: none)').matches) return;
-
   document.querySelectorAll('.offer-card').forEach((card) => {
     card.addEventListener('mousemove', (e) => {
-      const rect   = card.getBoundingClientRect();
-      const x      = e.clientX - rect.left;
-      const y      = e.clientY - rect.top;
-      const centerX = rect.width  / 2;
-      const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * -5;
-      const rotateY = ((x - centerX) / centerX) *  5;
-
-      card.style.transform = `translateY(-6px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      const r  = card.getBoundingClientRect();
+      const rx = (((e.clientY - r.top)  / r.height) - 0.5) * -10;
+      const ry = (((e.clientX - r.left) / r.width)  - 0.5) *  10;
+      card.style.transform = `translateY(-6px) rotateX(${rx}deg) rotateY(${ry}deg)`;
     });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+  });
+})();
 
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
+
+/* ------------------------------------------
+   7. REVIEW FORM
+   ─────────────────────────────────────────
+   Submits to Supabase → review instantly
+   visible on reviews.html for ALL visitors
+   on any device worldwide.
+
+   PASTE YOUR SUPABASE VALUES HERE:
+   (same values you put in reviews.html)
+   ------------------------------------------ */
+(function initReviewForm() {
+  const reviewForm = document.getElementById('reviewForm');
+  if (!reviewForm) return;
+
+  /* ── Supabase config — paste your values here ── */
+  const SUPABASE_URL     = 'YOUR_SUPABASE_URL';
+  const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+  /* ─────────────────────────────────────────────── */
+
+  const API     = `${SUPABASE_URL}/rest/v1/reviews`;
+  const HEADERS = {
+    'apikey'        : SUPABASE_ANON_KEY,
+    'Authorization' : `Bearer ${SUPABASE_ANON_KEY}`,
+    'Content-Type'  : 'application/json',
+    'Prefer'        : 'return=representation'
+  };
+
+  /* ── Star picker ── */
+  const starBtns    = document.querySelectorAll('.star-btn');
+  const ratingInput = document.getElementById('rRating');
+  let   selectedRating = 0;
+
+  starBtns.forEach((btn) => {
+    btn.addEventListener('mouseenter', () => {
+      const v = parseInt(btn.dataset.value);
+      starBtns.forEach(b => b.classList.toggle('hovered', parseInt(b.dataset.value) <= v));
+    });
+    btn.addEventListener('mouseleave', () => {
+      starBtns.forEach(b => {
+        b.classList.remove('hovered');
+        b.classList.toggle('selected', parseInt(b.dataset.value) <= selectedRating);
+      });
+    });
+    btn.addEventListener('click', () => {
+      selectedRating    = parseInt(btn.dataset.value);
+      ratingInput.value = selectedRating;
+      starBtns.forEach(b => b.classList.toggle('selected', parseInt(b.dataset.value) <= selectedRating));
+      showErr('rRating', 'rRatingError', false);
     });
   });
+
+  /* ── Error helpers ── */
+  function showErr(fieldId, errorId, show) {
+    const field = document.getElementById(fieldId);
+    const error = document.getElementById(errorId);
+    if (!field || !error) return;
+    field.classList.toggle('error', show);
+    error.classList.toggle('show', show);
+  }
+
+  ['rName','rReview'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', () => showErr(id, id + 'Error', false));
+  });
+  const rEvent = document.getElementById('rEvent');
+  if (rEvent) rEvent.addEventListener('change', () => showErr('rEvent', 'rEventError', false));
+
+  /* ── Initials helper ── */
+  function getInitials(name) {
+    const parts = name.trim().split(/\s+/);
+    return parts.length === 1
+      ? parts[0].slice(0, 2).toUpperCase()
+      : (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  }
+
+  /* ── Submit ── */
+  reviewForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const name   = document.getElementById('rName').value.trim();
+    const event  = document.getElementById('rEvent').value;
+    const rating = ratingInput.value;
+    const text   = document.getElementById('rReview').value.trim();
+    let   valid  = true;
+
+    if (!name)   { showErr('rName',   'rNameError',   true); valid = false; }
+    if (!event)  { showErr('rEvent',  'rEventError',  true); valid = false; }
+    if (!rating) { showErr('rRating', 'rRatingError', true); valid = false; }
+    if (!text)   { showErr('rReview', 'rReviewError', true); valid = false; }
+    if (!valid) return;
+
+    /* Loading state */
+    const submitBtn  = document.getElementById('reviewSubmitBtn');
+    const submitText = document.getElementById('reviewSubmitText');
+    const spinner    = document.getElementById('reviewSpinner');
+    submitBtn.disabled     = true;
+    submitText.textContent = 'Posting your review…';
+    spinner.style.display  = 'block';
+
+    /* Build the review row to insert into Supabase */
+    const review = {
+      name        : name,
+      initials    : getInitials(name),
+      event_type  : event,
+      rating      : Number(rating),
+      review_text : text,
+      date_label  : new Date().toLocaleDateString('en-CA', { month: 'long', year: 'numeric' }),
+      submitted_at: new Date().toISOString(),
+      verified    : true
+    };
+
+    try {
+      const res = await fetch(API, {
+        method  : 'POST',
+        headers : HEADERS,
+        body    : JSON.stringify(review)
+      });
+
+      if (res.ok) {
+        /* ✅ Saved to Supabase — show thank you */
+        spinner.style.display = 'none';
+        document.getElementById('reviewFormWrap').style.display = 'none';
+        document.getElementById('reviewThankYou').style.display = 'block';
+      } else {
+        const err = await res.json();
+        console.error('Supabase error:', err);
+        showSubmitError('Something went wrong saving your review. Please try again.');
+        submitBtn.disabled     = false;
+        submitText.textContent = 'Submit My Review';
+        spinner.style.display  = 'none';
+      }
+
+    } catch (networkErr) {
+      console.error('Network error:', networkErr);
+      showSubmitError('Unable to connect. Please check your internet and try again.');
+      submitBtn.disabled     = false;
+      submitText.textContent = 'Submit My Review';
+      spinner.style.display  = 'none';
+    }
+  });
+
+  function showSubmitError(msg) {
+    let el = document.getElementById('reviewGeneralError');
+    if (!el) {
+      el = document.createElement('p');
+      el.id = 'reviewGeneralError';
+      el.style.cssText = 'color:#c0392b;font-size:0.82rem;margin-top:0.75rem;text-align:center;line-height:1.5;';
+      document.getElementById('reviewSubmitBtn').insertAdjacentElement('afterend', el);
+    }
+    el.textContent = msg;
+  }
 })();

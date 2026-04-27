@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Reviews — Ninang's On-The-Go Tots</title>
-  <link rel="icon" sizes="32x32" href="logo.png">
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;500;600;700&display=swap"
     rel="stylesheet"
@@ -545,6 +544,12 @@
       nav { padding: 0 1.25rem; }
     }
   </style>
+  <!-- Favicons -->
+  <link rel="icon" type="image/x-icon"         href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180"  href="apple-touch-icon.png" />
+  <meta name="theme-color" content="#EAF0E6" />
 </head>
 <body>
 
@@ -552,7 +557,7 @@
   <nav id="navbar">
     <a href="index.html" class="nav-logo-wrap">
       <img
-        src="domainlogo.png"
+        src="ninangs.png"
         alt="Ninang's On-The-Go Tots logo"
         class="nav-logo-img"
       />
@@ -564,8 +569,7 @@
     <ul class="nav-links">
       <li><a href="about.html">About Us</a></li>
       <li><a href="index.html#offer">Services</a></li>
-      <!--<li><a href="packages.html">Packages</a></li> -->
-      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="packages-pricing.html">Packages &amp; Pricing</a></li>
       <li><a href="reviews.html" class="active">Reviews</a></li>
       <li><a href="booking.html" class="nav-cta">Book Now</a></li>
     </ul>
@@ -633,8 +637,9 @@
     <div class="footer-logo">Ninang's On-The-Go Tots</div>
     <p class="footer-tagline">Caring like family — wherever you go.</p>
     <ul class="footer-links">
-      <li><a href="index.html#offer">Services</a></li>
       <li><a href="about.html">About Us</a></li>
+      <li><a href="index.html#offer">Services</a></li>
+      <li><a href="packages-pricing.html">Packages &amp; Pricing</a></li>
       <li><a href="reviews.html">Reviews</a></li>
       <li><a href="booking.html">Book Now</a></li>
       <li><a href="mailto:ninangsonthegotots@gmail.com" style="color:var(--sage-light);">ninangsonthegotots@gmail.com</a></li>
@@ -642,120 +647,138 @@
     <p class="footer-copy">© 2025 Ninang's On-The-Go Tots. All rights reserved.</p>
   </footer>
 
-
   <script>
-    /* ============================================================
+    /* ================================================================
        NINANG'S ON-THE-GO TOTS — reviews.html
-       Live reviews powered by JSONBin.io (free, no backend)
+       Powered by Supabase (free cloud database)
+       Reviews submitted anywhere → stored in cloud → visible to ALL
+       visitors instantly, on any device, worldwide.
+    ================================================================
 
-       ONE-TIME SETUP (~2 minutes):
-       1. Go to https://jsonbin.io → create a FREE account
-       2. Click "New Bin" → paste:  { "reviews": [] }  → Save
-       3. Copy the Bin ID from the URL bar
-       4. Go to Account → API Keys → copy your Master Key
-       5. Paste both values below — done!
+    ⚙️  SETUP — replace these two values after creating your Supabase
+        project (full instructions at the bottom of this file):        */
 
-       TO ADD AN APPROVED REVIEW:
-       Open this page in Chrome, open DevTools Console (F12), and run:
-         addApprovedReview({
-           name: 'Maria S.', event: 'Wedding / Reception',
-           rating: 5, text: 'Amazing service!'
-         });
-       The review instantly appears for all visitors worldwide.
-    ============================================================ */
+    const SUPABASE_URL    = 'https://zfkwtrsyddxgzrjmvlul.supabase.co/rest/v1/';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpma3d0cnN5ZGR4Z3pyam12bHVsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyNzU1MDMsImV4cCI6MjA5Mjg1MTUwM30.U3SKZnpevil7y78_FkwGb4uKM5b3m9Gol5NlvAC1c-4';
 
-    const JSONBIN_BIN_ID  = 'YOUR_BIN_ID_HERE';
-    const JSONBIN_API_KEY = 'YOUR_API_KEY_HERE';
-    const JSONBIN_URL     = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
-    const isConfigured    = JSONBIN_BIN_ID !== 'YOUR_BIN_ID_HERE';
+    /* ================================================================ */
 
-    /* ── Seed reviews shown before JSONBin is configured ── */
-    const SEED_REVIEWS = [
-      { name: 'Ana & Carlo',  initials: 'AC', event: 'Wedding / Reception',   rating: 5, date: 'March 2025',    text: "Ninang's team was an absolute blessing at our wedding. The kids were so happy and entertained — we didn't worry once. Our little nephew even cried when they had to leave!" },
-      { name: 'Marites R.',   initials: 'MR', event: 'Debut / Milestone Party', rating: 5, date: 'January 2025', text: "Booked them for my daughter's debut and they handled all the younger siblings perfectly. They set up a whole little play area — parents were so impressed. Will book again!" },
-      { name: 'Jerome S.',    initials: 'JS', event: 'Corporate / Work Event',  rating: 5, date: 'February 2025', text: "Our company family day needed reliable child supervision and Ninang's delivered. Professional, warm, and the children loved them. Highly recommended for corporate events!" }
-    ];
+    const isConfigured = !SUPABASE_URL.includes('YOUR_SUPABASE');
+    const API          = `${SUPABASE_URL}/rest/v1/reviews`;
+    const HEADERS      = {
+      'apikey'        : SUPABASE_ANON_KEY,
+      'Authorization' : `Bearer ${SUPABASE_ANON_KEY}`,
+      'Content-Type'  : 'application/json',
+      'Prefer'        : 'return=representation'
+    };
 
     let ALL_REVIEWS   = [];
     let currentFilter = 'All';
 
-    /* ── Helpers ── */
+    /* ── Stars ── */
     const starsHTML = r => '★'.repeat(r) + '☆'.repeat(5 - r);
 
     function getInitials(name) {
       const p = name.trim().split(/\s+/);
-      return p.length === 1 ? p[0].slice(0, 2).toUpperCase() : (p[0][0] + p[p.length-1][0]).toUpperCase();
+      return p.length === 1 ? p[0].slice(0,2).toUpperCase() : (p[0][0]+p[p.length-1][0]).toUpperCase();
     }
 
-    function fmtDate(iso) {
-      try { return new Date(iso).toLocaleDateString('en-CA', { month: 'long', year: 'numeric' }); }
-      catch { return iso || ''; }
-    }
-
-    /* ── Fetch from JSONBin ── */
+    /* ── Fetch all reviews from Supabase, newest first ── */
     async function fetchReviews() {
-      if (!isConfigured) {
-        ALL_REVIEWS = SEED_REVIEWS;
-      } else {
-        try {
-          const res  = await fetch(JSONBIN_URL + '/latest', { headers: { 'X-Master-Key': JSONBIN_API_KEY } });
-          const data = await res.json();
-          ALL_REVIEWS = (data.record && Array.isArray(data.record.reviews)) ? data.record.reviews : SEED_REVIEWS;
-        } catch {
-          ALL_REVIEWS = SEED_REVIEWS;
-        }
+      showLoading(true);
+      try {
+        const res  = await fetch(`${API}?order=submitted_at.desc`, { headers: HEADERS });
+        const data = await res.json();
+        ALL_REVIEWS = Array.isArray(data) ? data : [];
+      } catch (err) {
+        console.error('Fetch error:', err);
+        ALL_REVIEWS = [];
       }
+      showLoading(false);
       renderReviews(currentFilter);
       updateStats();
     }
 
-    /* ── Build card ── */
-    function buildCard(review, i) {
-      const card = document.createElement('div');
-      card.className = 'review-card';
-      card.dataset.event = review.event;
-      card.style.animationDelay = (i * 80) + 'ms';
-      const initials = review.initials || getInitials(review.name);
-      const date     = review.date || fmtDate(review.submittedAt);
+    /* ── Render grid ── */
+    function renderReviews(filter) {
+      const grid = document.getElementById('reviewsGrid');
+      grid.innerHTML = '';
+
+      const list = filter === 'All'
+        ? ALL_REVIEWS
+        : ALL_REVIEWS.filter(r => r.event_type === filter);
+
+      if (!list.length) {
+        grid.innerHTML = `
+          <div class="no-reviews">
+            <div style="font-size:2.5rem;margin-bottom:.75rem;">🌿</div>
+            <p>No reviews yet${filter !== 'All' ? ' for this event type' : ''}.<br>
+               Be the first to
+               <a href="index.html#leave-review"
+                  style="color:var(--sage-dark);font-weight:700;text-decoration:none;">
+                 share your experience →
+               </a>
+            </p>
+          </div>`;
+        return;
+      }
+
+      list.forEach((r, i) => grid.appendChild(buildCard(r, i)));
+    }
+
+    /* ── Build one card ── */
+    function buildCard(r, i) {
+      const card         = document.createElement('div');
+      card.className     = 'review-card';
+      card.dataset.event = r.event_type;
+      card.style.animationDelay = (i * 55) + 'ms';
+
+      const initials  = r.initials || getInitials(r.name);
+      const dateLabel = r.date_label || new Date(r.submitted_at).toLocaleDateString('en-CA', { month:'long', year:'numeric' });
+
       card.innerHTML = `
         <div class="review-card-top">
-          <div class="review-stars">${starsHTML(review.rating)}</div>
-          <div class="review-event-tag">${review.event}</div>
+          <div class="review-stars">${starsHTML(r.rating)}</div>
+          <div class="review-event-tag">${r.event_type}</div>
         </div>
         <div class="review-quote">"</div>
-        <p class="review-text">${review.text}</p>
+        <p class="review-text">${r.review_text}</p>
         <div class="review-author">
           <div class="review-avatar">${initials}</div>
           <div>
-            <div class="review-author-name">${review.name}</div>
-            <div class="review-author-date">${date}</div>
+            <div class="review-author-name">
+              ${r.name}
+              <span class="verified-badge">✓ Verified</span>
+            </div>
+            <div class="review-author-date">${dateLabel}</div>
           </div>
         </div>`;
       return card;
     }
 
-    /* ── Render ── */
-    function renderReviews(filter) {
-      const grid = document.getElementById('reviewsGrid');
-      grid.innerHTML = '';
-      const list = filter === 'All' ? ALL_REVIEWS : ALL_REVIEWS.filter(r => r.event === filter);
-      if (!list.length) {
-        grid.innerHTML = `<div class="no-reviews"><div style="font-size:2rem;margin-bottom:.5rem;">🌿</div><p>No reviews yet for this event type.<br>Be the first to share your experience!</p></div>`;
-        return;
-      }
-      const sorted = [...list].sort((a, b) => new Date(b.submittedAt || 0) - new Date(a.submittedAt || 0));
-      sorted.forEach((r, i) => grid.appendChild(buildCard(r, i)));
-    }
-
     /* ── Stats ── */
     function updateStats() {
       const total = ALL_REVIEWS.length;
-      const avg   = total ? (ALL_REVIEWS.reduce((s, r) => s + Number(r.rating), 0) / total).toFixed(1) : '—';
+      const avg   = total
+        ? (ALL_REVIEWS.reduce((s, r) => s + Number(r.rating), 0) / total).toFixed(1)
+        : '—';
       document.getElementById('totalReviews').textContent = total;
-      document.getElementById('avgRating').textContent    = avg;
+      document.getElementById('avgRating').textContent    = total ? avg + ' ★' : '—';
     }
 
-    /* ── Filter ── */
+    /* ── Loading state ── */
+    function showLoading(on) {
+      const grid = document.getElementById('reviewsGrid');
+      if (on) {
+        grid.innerHTML = `
+          <div class="no-reviews">
+            <div class="loading-spinner"></div>
+            <p style="margin-top:1rem;">Loading reviews…</p>
+          </div>`;
+      }
+    }
+
+    /* ── Filter buttons ── */
     document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -765,38 +788,70 @@
       });
     });
 
-    /* ── Navbar ── */
+    /* ── Navbar scroll ── */
     const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 10), { passive: true });
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
 
-    /* ── Add approved review via console ── */
-    window.addApprovedReview = async function(data) {
-      if (!isConfigured) { console.warn('Set JSONBIN_BIN_ID and JSONBIN_API_KEY first.'); return; }
-      const getRes  = await fetch(JSONBIN_URL + '/latest', { headers: { 'X-Master-Key': JSONBIN_API_KEY } });
-      const getData = await getRes.json();
-      const reviews = (getData.record && getData.record.reviews) ? getData.record.reviews : [];
-      reviews.unshift({
-        name        : data.name,
-        initials    : data.initials || getInitials(data.name),
-        event       : data.event,
-        rating      : Number(data.rating),
-        text        : data.text,
-        date        : data.date || new Date().toLocaleDateString('en-CA', { month: 'long', year: 'numeric' }),
-        submittedAt : new Date().toISOString()
-      });
-      const putRes = await fetch(JSONBIN_URL, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_API_KEY },
-        body: JSON.stringify({ reviews })
-      });
-      if (putRes.ok) { console.log('✅ Review added! Refreshing...'); await fetchReviews(); }
-      else console.error('❌ Failed:', await putRes.text());
-    };
+    /* ── Mobile drawer ── */
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navDrawer    = document.getElementById('navDrawer');
+    const drawerClose  = document.getElementById('drawerClose');
+    const navOverlay   = document.getElementById('navOverlay');
+    if (hamburgerBtn) {
+      const open  = () => { navDrawer.classList.add('open'); navOverlay.classList.add('show'); document.body.style.overflow='hidden'; };
+      const close = () => { navDrawer.classList.remove('open'); navOverlay.classList.remove('show'); document.body.style.overflow=''; };
+      hamburgerBtn.addEventListener('click', open);
+      drawerClose.addEventListener('click', close);
+      navOverlay.addEventListener('click', close);
+      document.querySelectorAll('.drawer-link').forEach(l => l.addEventListener('click', close));
+    }
 
-    /* ── Init ── */
-    fetchReviews();
+    /* ── Boot ── */
+    if (isConfigured) {
+      fetchReviews();
+    } else {
+      /* Show setup reminder until configured */
+      document.getElementById('reviewsGrid').innerHTML = `
+        <div class="no-reviews">
+          <div style="font-size:2rem;margin-bottom:.75rem;">⚙️</div>
+          <p><strong>Supabase not connected yet.</strong><br>
+             Follow the setup steps in the README to connect your database.<br>
+             Once connected, all submitted reviews will appear here instantly.</p>
+        </div>`;
+    }
 
   </script>
+
+  <style>
+    .verified-badge {
+      display: inline-flex; align-items: center;
+      font-size: 0.65rem; font-weight: 700;
+      color: var(--sage-dark); background: var(--sage-pale);
+      border: 1px solid var(--sage-light); border-radius: 50px;
+      padding: 0.1rem 0.5rem; margin-left: 0.45rem;
+      vertical-align: middle; letter-spacing: 0.04em;
+    }
+    .review-card { animation: cardIn 0.38s ease both; }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .no-reviews {
+      grid-column: 1 / -1; text-align: center;
+      padding: 5rem 2rem; color: var(--text-muted);
+      font-size: 0.95rem; line-height: 1.75;
+    }
+    .loading-spinner {
+      width: 36px; height: 36px; margin: 0 auto;
+      border: 3px solid var(--beige);
+      border-top-color: var(--sage);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
 
 </body>
 </html>
