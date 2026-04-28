@@ -813,33 +813,13 @@
       <a href="packages-pricing.html" style="font-size:0.78rem;color:rgba(255,253,246,0.45);text-decoration:none;">Pricing</a>
       <a href="reviews.html" style="font-size:0.78rem;color:rgba(255,253,246,0.45);text-decoration:none;">Reviews</a>
     </div>
-    <p>© 2025 Ninang's On-The-Go Tots. All rights reserved. &nbsp;|&nbsp; Caring like family — wherever you go.</p>
+    <p>© 2026 Ninang's On-The-Go Tots. All rights reserved. &nbsp;|&nbsp; Caring like family — wherever you go.</p>
   </footer>
 
 
   <script>
-    /* ============================================================
-       NINANG'S CHILDCARE — Booking Form (Formspree Integration)
-       ============================================================
-
-       HOW TO CONNECT TO FORMSPREE + GOOGLE SHEETS:
-       -----------------------------------------------
-       STEP 1 — Sign up free at https://formspree.io
-       STEP 2 — Create a new form project in Formspree dashboard
-       STEP 3 — Copy your unique endpoint URL (looks like:
-                 https://formspree.io/f/xabcdefg)
-       STEP 4 — Replace the FORMSPREE_ENDPOINT value below
-                 with YOUR endpoint URL
-       STEP 5 — In Formspree dashboard → Integrations →
-                 connect Google Sheets. Every submission will
-                 automatically land as a new row in your sheet!
-       ============================================================ */
-
-    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
-    //                                                   ^^^^^^^^^^^
-    //                          Replace this with your actual Formspree form ID
-
-    /* --- DOM refs --- */
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xyklnbla';
+ 
     const form        = document.getElementById('bookingForm');
     const submitBtn   = document.getElementById('submitBtn');
     const submitText  = document.getElementById('submitText');
@@ -979,12 +959,7 @@
     }, { passive: true });
 
 
-    /* -------------------------------------------------------
-       AUTO-SELECT PACKAGE FROM URL PARAMETER
-       booking.html?package=tahanan  → pre-selects Tahanan
-       booking.html?package=alaga   → pre-selects Alaga
-       booking.html?package=pamilya → pre-selects Pamilya
-    ------------------------------------------------------- */
+
     (function autoSelectPackage() {
       const params = new URLSearchParams(window.location.search);
       const pkg    = params.get('package');
